@@ -4,11 +4,11 @@ import PageHeader from '@components/PageHeader.astro'
 import { Notification } from 'accessible-astro-components'
 ---
 
-<DefaultLayout title="Accessible launcher">
+<DefaultLayout title="快捷启动器">
   <section class="my-12">
     <PageHeader
-      title="Accessible launcher"
-      subtitle="This theme includes the Accessible Astro Launcher component from the <a href='https://github.com/incluud/accessible-astro-launcher'>Accessible Astro Launcher</a> NPM package to accelerate accessible development. For detailed documentation and usage examples, visit our <a href='https://accessible-astro-launcher.incluud.dev/'>documentation website</a>."
+      title="快捷启动器"
+      subtitle="本页展示“快捷启动器”能力：通过一个搜索框快速跳转页面或执行偏好设置命令，提升站内导航效率与可访问性体验。"
       bgType="bordered"
     />
   </section>
@@ -16,10 +16,8 @@ import { Notification } from 'accessible-astro-components'
     <div class="narrow container">
       <Notification type="info" variant="accent">
         <p>
-          Try the Accessible Astro Launcher component by pressing <kbd class="kbd">Cmd + K</kbd> (Mac) or <kbd
-            class="kbd">Ctrl + K</kbd
-          > (Windows/Linux). The Launcher will open a dialog with a search input and a list of items. The search input is
-          automatically focused when the dialog opens.
+          试试快捷启动器：按 <kbd class="kbd">Cmd + K</kbd>（Mac）或 <kbd class="kbd">Ctrl + K</kbd>（Windows/Linux）。将会打开
+          一个包含搜索框与项目列表的对话框，并在打开时自动聚焦到搜索输入框。
         </p>
       </Notification>
     </div>

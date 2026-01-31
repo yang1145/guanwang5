@@ -10,60 +10,54 @@ import { Accordion, AccordionItem, Avatar, AvatarGroup, Heading, Link } from 'ac
 import { Icon } from 'astro-icon/components'
 ---
 
-<DefaultLayout title="Accessible Astro Starter - Build Faster, More Inclusive Websites" useTitleTemplate={false}>
+<DefaultLayout title="示例科技有限公司｜企业数字化与高品质交付" useTitleTemplate={false}>
   <Hero />
   <section class="my-64">
     <div class="container">
-      <Heading level="h2" class="mb-8">Features</Heading>
+      <Heading level="h2" class="mb-8">核心能力</Heading>
       <div class="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3">
-        <Feature icon="lucide:accessibility" title="Accessible by default">
-          Keyboard navigation, focus indicators, ARIA labels, semantic HTML, and more. This theme is designed to be
-          inclusive.
+        <Feature icon="lucide:accessibility" title="无障碍与可用性">
+          采用语义化结构、清晰的焦点指示与键盘可用交互，让每位用户都能顺畅访问与完成关键任务。
         </Feature>
-        <Feature icon="lucide:puzzle" title="A11Y components">
-          35+ components and counting, all tried and tested for the most optimal accessible experience for your
-          visitors.
+        <Feature icon="lucide:puzzle" title="组件化与一致性">
+          将常用业务模块沉淀为可复用组件，统一交互与视觉规范，提升迭代效率并降低维护成本。
         </Feature>
-        <Feature icon="lucide:moon" title="Dark mode">
-          Fully integrated Dark mode gives your users the choice for their favorite viewing mode.
+        <Feature icon="lucide:moon" title="多主题适配">
+          支持深色模式与品牌主题扩展，为不同设备与使用场景提供更舒适的阅读与操作体验。
         </Feature>
-        <Feature icon="lucide:paintbrush" title="Tailwind 4.0">
-          Use the power of Tailwind to greatly improve your productivity and enhance your developer workflow.
+        <Feature icon="lucide:paintbrush" title="品牌视觉与体验设计">
+          围绕品牌调性与业务转化目标，提供信息架构、页面设计与交互优化，打造更可信、更好用的官网体验。
         </Feature>
-        <Feature icon="lucide:sparkles" title="Prettier">
-          Less worry about formatting your code, let the Astro Prettier integration do the heavy lifting.
+        <Feature icon="lucide:sparkles" title="高效交付">
+          从需求澄清到上线发布，流程标准化、可追踪，确保在既定周期内交付可持续演进的成果。
         </Feature>
-        <Feature icon="lucide:code" title="ESLint">
-          Lint your code with strict a11y settings to ensure you stay on track with the WCAG standards.
+        <Feature icon="lucide:code" title="工程化与质量保障">
+          通过规范化的工程实践与自动化校验，降低缺陷率，保障可读性、可维护性与长期演进能力。
         </Feature>
-        <Feature icon="lucide:bookmark" title="Blog & portfolio">
-          This theme comes with a fully integrated blog and portfolio, dynamic pages and SEO optimization.
+        <Feature icon="lucide:bookmark" title="内容与案例沉淀">
+          将新闻动态、产品更新与交付案例结构化沉淀，便于持续运营与对外展示。
         </Feature>
-        <Feature icon="lucide:file-text" title="Markdown & MDX">
-          Easily use .md and .mdx pages to build your websites or use it with Netlify CMS.
+        <Feature icon="lucide:file-text" title="内容管理与易维护">
+          内容支持结构化写作与版本管理，便于协作编辑、快速发布与长期维护。
         </Feature>
-        <Feature icon="lucide:blocks" title="Design system">
-          The theme offers some very handy utilities to help you build your website faster.
+        <Feature icon="lucide:blocks" title="可扩展架构">
+          预留扩展接口与清晰的目录结构，方便后续接入表单、搜索、数据分析与更多业务能力。
         </Feature>
       </div>
     </div>
   </section>
   <ContentMedia imgSrc="/accessible-components.webp">
-    <Heading level="h2">Accessible components</Heading>
+    <Heading level="h2">解决方案与服务</Heading>
     <p class="text-2xl">
-      This theme provides plenty of tried and tested Accessible Astro Components. Some are native to this theme and a
-      lot of others are integrated using a <Link
-        isExternal
-        href="https://github.com/incluud/accessible-astro-components">separate package</Link
-      >. They'll get you up and running in building an accessible solution for your visitors.
+      围绕企业官网建设、品牌升级与业务系统落地，我们提供从需求分析、设计研发到上线运维的一站式服务，帮助你更快
+      建成可持续迭代的数字化阵地。
     </p>
   </ContentMedia>
   <ContentMedia imgSrc="/wcag-compliant.webp" reverseImg={true}>
-    <Heading level="h2">WCAG 2.2 AA compliant</Heading>
+    <Heading level="h2">质量与合规</Heading>
     <p class="text-2xl">
-      Using semantic HTML, landmarks, skip links, screen reader friendly content, aria-labels, keyboard accessible
-      navigation and components, clear outlines and tab indicators and the right color contrast, you're more certain of
-      reaching WCAG AA compliance.
+      我们重视性能、可用性与安全合规：从语义化结构、清晰的交互反馈到合理的色彩对比度，让网站在不同设备与辅助技术下
+      都稳定可用，并为合规与增长打好基础。
     </p>
   </ContentMedia>
   <FeaturedProjects />
@@ -71,58 +65,45 @@ import { Icon } from 'astro-icon/components'
   <section class="my-64">
     <div class="container grid grid-cols-1 gap-12 md:grid-cols-2">
       <div class="flex flex-col items-start gap-4">
-        <Heading level="h2">FAQ</Heading>
+        <Heading level="h2">常见问题</Heading>
         <p class="text-2xl">
-          This section demonstrates how to effectively use the Accordion component to organize and display frequently
-          asked questions in an accessible and user-friendly way.
+          这里整理了客户在官网建设与系统交付过程中常见的几个问题，便于你快速了解我们的合作方式与交付标准。
         </p>
-        <Link href="/faq" isButton type="primary" animateOnHover animationType="boop">
+        <Link href="/contact" isButton type="primary" animateOnHover animationType="boop">
           <Icon aria-hidden="true" name="lucide:headset" size=" 1.5rem" />
-          Contact support team
+          预约沟通
         </Link>
       </div>
       <div class="space-content">
         <Accordion>
-          <AccordionItem name="exclusive" title="What is WCAG and why is it important?" open>
+          <AccordionItem name="exclusive" title="你们可以提供哪些服务？" open>
             <p>
-              WCAG (Web Content Accessibility Guidelines) is a set of internationally recognized standards for web
-              accessibility. Following WCAG ensures your website is usable by people with various disabilities,
-              including visual, auditory, physical, and cognitive impairments. It's important not just for
-              accessibility, but also for legal compliance, SEO, and reaching a wider audience.
+              我们覆盖企业官网/品牌站、活动落地页、后台管理系统、内容管理与运营支持等，支持从 0 到 1 建站，也支持现有站点
+              的改版与性能优化。
             </p>
           </AccordionItem>
-          <AccordionItem name="exclusive" title="What's the difference between ARIA labels and alt text?">
+          <AccordionItem name="exclusive" title="项目周期一般多久？">
             <p>
-              Alt text is specifically for describing images to screen reader users, while ARIA labels (aria-label,
-              aria-labelledby) can describe any element on a page. Alt text is HTML's native way to provide alternative
-              text for images, while ARIA labels are part of the ARIA specification that helps make dynamic content and
-              advanced UI controls more accessible.
+              视需求复杂度而定。常见的企业官网通常在数周内可完成首版交付；如涉及多语言、内容迁移、系统集成等，会在评审后给出
+              可执行的排期与里程碑计划。
             </p>
           </AccordionItem>
-          <AccordionItem name="exclusive" title="Why is keyboard navigation important?">
+          <AccordionItem name="exclusive" title="如何报价？">
             <p>
-              Keyboard navigation is essential for users who can't use a mouse, including people with motor
-              disabilities, visual impairments, or those who simply prefer keyboard controls. A website should be fully
-              operable using only a keyboard, with visible focus indicators and logical tab order. This includes being
-              able to access all interactive elements and navigate through content efficiently.
+              我们根据页面规模、功能模块、内容量与交付周期综合评估。你可以先提供目标、参考站点与大致范围，我们会给出分阶段的
+              方案与预算建议。
             </p>
           </AccordionItem>
-          <AccordionItem name="exclusive" title="What is a sufficient color contrast ratio?">
+          <AccordionItem name="exclusive" title="交付物包含哪些？">
             <p>
-              According to WCAG 2.2 AA standards, text should have a minimum contrast ratio of 4.5:1 against its
-              background for regular text, and 3:1 for large text (18pt or 14pt bold). For non-text elements like icons
-              or buttons, a minimum ratio of 3:1 is required. This ensures content is readable for users with visual
-              impairments or color blindness.
+              通常包含设计稿、前端页面与组件、必要的内容结构/配置、上线部署说明与基础使用文档；如有后台或接口集成，也会包含
+              相应的接口说明与验收清单。
             </p>
           </AccordionItem>
-          <AccordionItem name="exclusive" title="How do I make custom components accessible?">
+          <AccordionItem name="exclusive" title="如何保障质量与可维护性？">
             <p>
-              To make custom components accessible, focus on these key aspects: use semantic HTML where possible,
-              implement proper keyboard support, add appropriate ARIA attributes, manage focus when needed, and ensure
-              adequate color contrast. Always test with screen readers and keyboard navigation. Consider using
-              established design patterns from the <Link href="https://www.w3.org/WAI/ARIA/apg/patterns/"
-                >ARIA Authoring Practices Guide</Link
-              >.
+              我们遵循统一的工程规范与组件化实践，提供清晰的结构与命名，配合自动化检查与验收清单，确保上线后的可扩展性与
+              长期维护成本可控。
             </p>
           </AccordionItem>
         </Accordion>
@@ -131,32 +112,31 @@ import { Icon } from 'astro-icon/components'
   </section>
   <section class="my-64">
     <div class="space-content container">
-      <Heading level="h2">Our community</Heading>
+      <Heading level="h2">我们的团队</Heading>
       <p class="text-2xl">
-        We're a community of developers who are passionate about making the web more accessible. We're always looking
-        for new ways to improve the accessibility of the web.
+        我们是一支覆盖产品、设计、前端与交付管理的团队，长期服务企业客户，关注体验、性能与可持续迭代。
       </p>
       <AvatarGroup display="grid" gridItemsSize="300px" gridGap="2rem">
-        <Avatar initials="RJ" title="Robert Johnson" subtitle="Manager" />
-        <Avatar initials="MT" title="Maria Torres" subtitle="Developer" />
-        <Avatar initials="AK" title="Alex Kim" subtitle="Designer" />
-        <Avatar initials="SL" title="Sarah Lee" subtitle="Content Strategist" />
-        <Avatar initials="JP" title="James Peterson" subtitle="QA Engineer" />
-        <Avatar initials="LW" title="Lisa Wong" subtitle="Product Owner" />
-        <Avatar initials="DM" title="David Martinez" subtitle="UX Researcher" />
-        <Avatar initials="EB" title="Emma Brown" subtitle="Accessibility Specialist" />
-        <Avatar initials="TC" title="Thomas Chen" subtitle="Frontend Developer" />
+        <Avatar initials="PM" title="王敏" subtitle="项目经理" />
+        <Avatar initials="FE" title="陈涛" subtitle="前端工程师" />
+        <Avatar initials="UX" title="李薇" subtitle="交互设计师" />
+        <Avatar initials="BD" title="赵晨" subtitle="品牌设计师" />
+        <Avatar initials="QA" title="周涵" subtitle="测试工程师" />
+        <Avatar initials="PO" title="孙悦" subtitle="产品负责人" />
+        <Avatar initials="OP" title="高杰" subtitle="运维工程师" />
+        <Avatar initials="A11" title="韩雪" subtitle="可访问性顾问" />
+        <Avatar initials="RD" title="刘洋" subtitle="前端负责人" />
       </AvatarGroup>
     </div>
   </section>
   <section class="mt-64 mb-32">
     <div class="container">
-      <Heading level="h2" class="mb-16">Impact in numbers</Heading>
+      <Heading level="h2" class="mb-16">数据一览</Heading>
       <div class="grid grid-cols-1 gap-12 sm:grid-cols-2 md:grid-cols-4">
-        <Counter count="1.100+" title="Stars" sub="On GitHub" />
-        <Counter count="35+" title="Accessible" sub="Components" />
-        <Counter count="500+" title="Commits" sub="Merged" />
-        <Counter count="48+" title="Months" sub="Since launch" />
+        <Counter count="100+" title="合作客户" sub="累计服务" />
+        <Counter count="30+" title="行业经验" sub="覆盖场景" />
+        <Counter count="200+" title="交付项目" sub="稳定上线" />
+        <Counter count="8+" title="持续迭代" sub="年限沉淀" />
       </div>
     </div>
   </section>

@@ -1,27 +1,26 @@
 ---
 layout: ../layouts/MarkdownLayout.astro
-title: MDX Page
+title: MDX 页面示例
 ---
 
 import { Icon } from 'astro-icon/components'
 import { Notification } from 'accessible-astro-components'
 
-# MDX Page
+# MDX 页面示例
 
 <Notification type="info">
   <Icon aria-hidden="true" name="lucide:info" />
   <p>
-    <strong>Info:</strong> This page utilizes Astro's MDX feature which let's you use components in a markdown file and
-    supports out-of-the-box syntax highlighting with Shiki.
+    <strong>说明：</strong>本页演示 MDX 能力：在 Markdown 中直接使用组件，并支持基于 Shiki 的代码高亮。
   </p>
 </Notification>
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae veniam repellat deleniti obcaecati facilis non, praesentium aperiam laudantium excepturi assumenda doloremque animi quis aliquam eligendi quia nemo asperiores et eaque, sunt voluptatibus, saepe exercitationem id. Quis sequi maxime fugiat nam reprehenderit nesciunt quaerat obcaecati, ipsa dignissimos voluptatum voluptatem, optio quidem quos repudiandae dolorem voluptatibus fuga officia odio nemo recusandae voluptas.
+你可以用 MDX 来编写更丰富的内容页面，例如产品文档、更新日志或知识库文章：既保留 Markdown 的易写性，又能在需要的地方插入交互组件。
 
 ```js
 console.log('Hello Accessible World!')
 ```
 
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae veniam repellat deleniti obcaecati facilis non, praesentium aperiam laudantium excepturi assumenda doloremque animi quis aliquam eligendi quia nemo asperiores et eaque, sunt voluptatibus, saepe exercitationem id. Quis sequi maxime fugiat nam reprehenderit nesciunt quaerat obcaecati, ipsa dignissimos voluptatum voluptatem, optio quidem quos repudiandae dolorem voluptatibus fuga officia odio nemo recusandae voluptas.
+为保证可访问性，建议在使用组件时关注：键盘可用、可见焦点、可读标签与合理的语义结构。
 
-[Get this theme on GitHub](https://github.com/markteekman/accessible-astro-starter)
+[返回首页](/)

@@ -43,11 +43,17 @@ export default defineConfig({
   vite: enhanceConfigForWorkspace(viteConfig),
   env: {
     schema: {
-      BLOG_API_URL: envField.string({
+      API_BASE_URL: envField.string({
         context: 'server',
-        access: 'secret',
+        access: 'public',
         optional: true,
-        default: 'https://jsonplaceholder.typicode.com/posts',
+        default: 'http://localhost:3001/api',
+      }),
+      PUBLIC_API_BASE_URL: envField.string({
+        context: 'client',
+        access: 'public',
+        optional: true,
+        default: 'http://localhost:3001/api',
       }),
     },
   },

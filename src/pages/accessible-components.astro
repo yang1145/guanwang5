@@ -35,186 +35,164 @@ import {
 } from 'accessible-astro-components'
 
 const components = [
-  { name: 'Accordion', id: 'accordion' },
-  { name: 'Avatar', id: 'avatar' },
-  { name: 'Badge', id: 'badge' },
-  { name: 'Breadcrumbs', id: 'breadcrumbs' },
-  { name: 'Button', id: 'button' },
-  { name: 'Card', id: 'card' },
-  { name: 'Dark mode toggle', id: 'darkmode' },
-  { name: 'Form', id: 'form' },
-  { name: 'Heading', id: 'heading' },
-  { name: 'High contrast toggle', id: 'highcontrast' },
-  { name: 'Link', id: 'link' },
-  { name: 'Media', id: 'media' },
-  { name: 'Modal', id: 'modals' },
-  { name: 'Notification', id: 'notification' },
-  { name: 'Pagination', id: 'pagination' },
-  { name: 'Reduced motion toggle', id: 'reducedmotion' },
-  { name: 'Skip link', id: 'skiplink' },
-  { name: 'Tabs', id: 'tabs' },
-  { name: 'Video', id: 'video' },
+  { name: '折叠面板（Accordion）', id: 'accordion' },
+  { name: '头像（Avatar）', id: 'avatar' },
+  { name: '徽标（Badge）', id: 'badge' },
+  { name: '面包屑（Breadcrumbs）', id: 'breadcrumbs' },
+  { name: '按钮（Button）', id: 'button' },
+  { name: '卡片（Card）', id: 'card' },
+  { name: '深色模式切换', id: 'darkmode' },
+  { name: '表单（Form）', id: 'form' },
+  { name: '标题（Heading）', id: 'heading' },
+  { name: '高对比度切换', id: 'highcontrast' },
+  { name: '链接（Link）', id: 'link' },
+  { name: '媒体（Media）', id: 'media' },
+  { name: '弹窗（Modal）', id: 'modals' },
+  { name: '通知（Notification）', id: 'notification' },
+  { name: '分页（Pagination）', id: 'pagination' },
+  { name: '减少动效切换', id: 'reducedmotion' },
+  { name: '跳转链接（Skip link）', id: 'skiplink' },
+  { name: '标签页（Tabs）', id: 'tabs' },
+  { name: '视频（Video）', id: 'video' },
 ]
 ---
 
-<DefaultLayout title="Accessible components">
+<DefaultLayout title="组件展示">
   <section class="my-12">
     <PageHeader
-      title="Accessible components"
-      subtitle="This theme includes comprehensive accessibility components from the <a href='https://github.com/incluud/accessible-astro-components'>Accessible Astro Components</a> NPM package to accelerate accessible development. For detailed documentation and usage examples, visit our <a href='https://accessible-astro.incluud.dev/'>documentation website</a>. Additional components are available in the theme's components directory. Note: accessibility tools like aXe may report issues due to the static demonstration of the components on this page."
+      title="组件展示"
+      subtitle="本页用于演示常用 UI 组件与交互模式，关注键盘可用、可读标签与清晰的语义结构。实际官网可将此页作为“设计规范/组件库”参考。"
       bgType="bordered"
     />
   </section>
   <section class="mt-32 mb-12">
     <div class="components container">
       <div class="components-showcase space-content">
-        <Heading level="h2" id="accordion">Accordion</Heading>
+        <Heading level="h2" id="accordion">折叠面板</Heading>
         <p>
-          The Accordion component is used to show and hide content. It's a great way to keep your page clean and
-          accessible.
+          折叠面板用于展示/隐藏内容，是组织 FAQ、配置项与说明文档的常用方式，既节省空间，也更便于键盘与屏幕阅读器访问。
         </p>
-        <Heading level="h3">Default</Heading>
+        <Heading level="h3">默认样式</Heading>
         <Accordion>
-          <AccordionItem title="First Item">
+          <AccordionItem title="第一项">
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quasi nobis optio? Qui in quo
-              accusantium debitis <a href="#">sapiente obcaecati</a> magnam incidunt sit. Molestiae exercitationem quibusdam
-              quod veritatis laboriosam est tenetur.
+              这里是示例内容。你可以放置简短说明与链接，例如 <a href="#">查看更多</a>，并确保可通过键盘操作。
             </p>
-            <a href="#">Tab to me!</a>
+            <a href="#">用 Tab 键聚焦到我</a>
           </AccordionItem>
-          <AccordionItem title="Second Item">
+          <AccordionItem title="第二项">
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quasi nobis optio? Qui in quo
-              accusantium debitis sapiente obcaecati magnam incidunt sit. Molestiae exercitationem quibusdam quod
-              veritatis laboriosam est tenetur.
+              示例内容：用于说明某个要点，建议保持段落简洁，并用小标题清晰表达。
             </p>
           </AccordionItem>
-          <AccordionItem title="Third Item">
+          <AccordionItem title="第三项">
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quasi nobis optio? Qui in quo
-              accusantium debitis sapiente obcaecati magnam incidunt sit. Molestiae exercitationem quibusdam quod
-              veritatis laboriosam est tenetur.
+              示例内容：可以放置流程说明、注意事项或更多参考链接。
             </p>
           </AccordionItem>
-          <AccordionItem title="Fourth Item">
+          <AccordionItem title="第四项">
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quasi nobis optio? Qui in quo
-              accusantium debitis sapiente obcaecati magnam incidunt sit. Molestiae exercitationem quibusdam quod
-              veritatis laboriosam est tenetur.
+              示例内容：对于长内容，建议拆分为列表或分段，提升阅读效率。
             </p>
           </AccordionItem>
-          <AccordionItem title="Fifth Item">
+          <AccordionItem title="第五项">
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quasi nobis optio? Qui in quo
-              accusantium debitis sapiente obcaecati magnam incidunt sit. Molestiae exercitationem quibusdam quod
-              veritatis laboriosam est tenetur.
+              示例内容：折叠面板适合承载“可选阅读”的补充信息。
             </p>
           </AccordionItem>
         </Accordion>
 
-        <Heading level="h3">Chevron</Heading>
+        <Heading level="h3">箭头样式</Heading>
         <Accordion>
-          <AccordionItem name="exclusive" title="First Item" variant="chevron">
+          <AccordionItem name="exclusive" title="第一项" variant="chevron">
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quasi nobis optio? Qui in quo
-              accusantium debitis <a href="#">sapiente obcaecati</a> magnam incidunt sit. Molestiae exercitationem quibusdam
-              quod veritatis laboriosam est tenetur.
+              这里是示例内容。你可以放置简短说明与链接，例如 <a href="#">查看更多</a>。
             </p>
-            <a href="#">Tab to me!</a>
+            <a href="#">用 Tab 键聚焦到我</a>
           </AccordionItem>
-          <AccordionItem name="exclusive" title="Second Item" variant="chevron">
+          <AccordionItem name="exclusive" title="第二项" variant="chevron">
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quasi nobis optio? Qui in quo
-              accusantium debitis sapiente obcaecati magnam incidunt sit. Molestiae exercitationem quibusdam quod
-              veritatis laboriosam est tenetur.
+              示例内容：同组折叠面板可配置为互斥展开，便于聚焦阅读。
             </p>
           </AccordionItem>
-          <AccordionItem name="exclusive" title="Third Item" variant="chevron">
+          <AccordionItem name="exclusive" title="第三项" variant="chevron">
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quasi nobis optio? Qui in quo
-              accusantium debitis sapiente obcaecati magnam incidunt sit. Molestiae exercitationem quibusdam quod
-              veritatis laboriosam est tenetur.
+              示例内容：标题应尽量描述清楚内容主题，减少“点开才知道”的成本。
             </p>
           </AccordionItem>
-          <AccordionItem name="exclusive" title="Fourth Item" variant="chevron">
+          <AccordionItem name="exclusive" title="第四项" variant="chevron">
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quasi nobis optio? Qui in quo
-              accusantium debitis sapiente obcaecati magnam incidunt sit. Molestiae exercitationem quibusdam quod
-              veritatis laboriosam est tenetur.
+              示例内容：可用于参数解释、政策条款或常见问题。
             </p>
           </AccordionItem>
-          <AccordionItem name="exclusive" title="Fifth Item" variant="chevron">
+          <AccordionItem name="exclusive" title="第五项" variant="chevron">
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quasi nobis optio? Qui in quo
-              accusantium debitis sapiente obcaecati magnam incidunt sit. Molestiae exercitationem quibusdam quod
-              veritatis laboriosam est tenetur.
+              示例内容：配合合理的键盘操作与焦点管理，能显著提升体验。
             </p>
           </AccordionItem>
         </Accordion>
 
-        <Heading level="h2" id="avatar">Avatar</Heading>
+        <Heading level="h2" id="avatar">头像</Heading>
         <p>
-          The Avatar component is used to display a user's profile picture. It can be used as a standalone component or
-          as part of an AvatarGroup.
+          头像用于展示人物/团队信息，可单独使用，也可组合展示团队角色。
         </p>
-        <Heading level="h3">Default</Heading>
+        <Heading level="h3">默认</Heading>
         <div class="flex-w flex gap-3">
           <Avatar initials="MT" label="Mark Teekman" />
           <Avatar initials="PP" label="Peter Padberg" type="info" shape="square" />
           <Avatar
-            label="Astronout"
+            label="宇航员"
             img="https://images.unsplash.com/photo-1620428268482-cf1851a36764?auto=format&fit=crop&q=100&w=800"
           />
         </div>
-        <Heading level="h3">With title and subtitle</Heading>
-        <Avatar title="Mark Teekman" subtitle="Developer & A11Y Expert" />
-        <Heading level="h3">Avatar group</Heading>
+        <Heading level="h3">带标题与说明</Heading>
+        <Avatar title="Mark Teekman" subtitle="开发者 / 无障碍专家" />
+        <Heading level="h3">头像组</Heading>
         <AvatarGroup>
-          <Avatar size="sm" label="Developer" initials="DV" />
-          <Avatar size="sm" type="info" label="Designer" initials="DS" />
-          <Avatar size="sm" type="success" label="Product Manager" initials="PM" />
-          <Avatar size="sm" type="warning" label="Marketing" initials="MK" />
-          <Avatar size="sm" type="error" label="Marketing" initials="MK" />
+          <Avatar size="sm" label="开发" initials="DV" />
+          <Avatar size="sm" type="info" label="设计" initials="DS" />
+          <Avatar size="sm" type="success" label="产品" initials="PM" />
+          <Avatar size="sm" type="warning" label="市场" initials="MK" />
+          <Avatar size="sm" type="error" label="运营" initials="OP" />
         </AvatarGroup>
 
-        <Heading level="h2" id="badge">Badge</Heading>
-        <p>The Badge component is used to display a badge with a type and a pulse effect.</p>
-        <Heading level="h3">Default</Heading>
+        <Heading level="h2" id="badge">徽标</Heading>
+        <p>徽标用于展示状态、分类或数量提示，可配合动效强调信息。</p>
+        <Heading level="h3">默认</Heading>
         <div class="flex flex-wrap gap-2">
-          <Badge type="default" pulse>Default</Badge>
-          <Badge type="info">Info</Badge>
-          <Badge type="success">Success</Badge>
-          <Badge type="warning">Warning</Badge>
-          <Badge type="error">Error</Badge>
+          <Badge type="default" pulse>默认</Badge>
+          <Badge type="info">信息</Badge>
+          <Badge type="success">成功</Badge>
+          <Badge type="warning">提醒</Badge>
+          <Badge type="error">错误</Badge>
         </div>
 
-        <Heading level="h3">Notification</Heading>
+        <Heading level="h3">数量提示</Heading>
         <div class="flex flex-wrap gap-4">
           <div style="position: relative; display: inline-flex;">
             <button style="background: none; border: none; cursor: pointer;">
               <Icon aria-hidden="true" name="lucide:mail" size="1.5rem" />
-              <span class="sr-only">3 unread messages</span>
+              <span class="sr-only">3 条未读消息</span>
             </button>
             <Badge type="error" isCircular size="sm" style="position: absolute; top: -5px; right: -5px;"> 3 </Badge>
           </div>
           <div style="position: relative; display: inline-flex;">
             <button style="background: none; border: none; cursor: pointer;">
               <Icon aria-hidden="true" name="lucide:bell" size="1.5rem" />
-              <span class="sr-only">5 new notifications</span>
+              <span class="sr-only">5 条新通知</span>
             </button>
             <Badge type="info" isCircular size="sm" style="position: absolute; top: -5px; right: -5px;"> 5 </Badge>
           </div>
           <div style="position: relative; display: inline-flex;">
             <button style="background: none; border: none; cursor: pointer;">
               <Icon aria-hidden="true" name="lucide:message-circle" size="1.5rem" />
-              <span class="sr-only">2 new comments</span>
+              <span class="sr-only">2 条新评论</span>
             </button>
             <Badge type="success" isCircular size="sm" style="position: absolute; top: -5px; right: -5px;"> 2 </Badge>
           </div>
         </div>
 
-        <Heading level="h3">Interactive</Heading>
+        <Heading level="h3">可交互</Heading>
         <div class="flex flex-wrap gap-2">
           <Badge
             type="info"
@@ -222,328 +200,321 @@ const components = [
             animateOnHover
             animationType="rotate"
             animationIntensity={20}
-            label="Refresh content"
+            label="刷新内容"
           >
             <Icon aria-hidden="true" name="lucide:refresh-cw" size="1rem" />
-            Refresh
+            刷新
           </Badge>
 
-          <Badge type="success" isButton animateOnHover animationType="bouncing" label="Approve item">
+          <Badge type="success" isButton animateOnHover animationType="bouncing" label="通过审核">
             <Icon aria-hidden="true" name="lucide:check-circle" size="1rem" />
-            Approve
+            通过
           </Badge>
 
-          <Badge type="warning" pulse> New feature (pulse) </Badge>
+          <Badge type="warning" pulse> 新功能（闪烁） </Badge>
         </div>
 
-        <Heading level="h2" id="breadcrumbs">Breadcrumbs</Heading>
-        <p>The Breadcrumbs component is used to display a list of breadcrumbs.</p>
-        <Heading level="h3">Default</Heading>
+        <Heading level="h2" id="breadcrumbs">面包屑</Heading>
+        <p>面包屑用于展示页面层级路径，帮助用户理解当前位置并快速返回上级。</p>
+        <Heading level="h3">默认</Heading>
         <Breadcrumbs>
-          <BreadcrumbsItem href="/" label="Home" />
-          <BreadcrumbsItem href="/blog" label="Blog" />
-          <BreadcrumbsItem currentPage={true} label="My blog post" />
+          <BreadcrumbsItem href="/" label="首页" />
+          <BreadcrumbsItem href="/blog" label="资讯中心" />
+          <BreadcrumbsItem currentPage={true} label="文章详情" />
         </Breadcrumbs>
-        <Heading level="h3">With icons</Heading>
+        <Heading level="h3">带图标</Heading>
         <Breadcrumbs>
-          <BreadcrumbsItem href="/" label="Home" hasIcon>
+          <BreadcrumbsItem href="/" label="首页" hasIcon>
             <Icon aria-hidden="true" name="lucide:home" slot="icon" />
           </BreadcrumbsItem>
-          <BreadcrumbsItem href="/docs" label="Documentation" />
-          <BreadcrumbsItem label="Breadcrumbs" currentPage={true} />
+          <BreadcrumbsItem href="/docs" label="文档" />
+          <BreadcrumbsItem label="面包屑" currentPage={true} />
         </Breadcrumbs>
-        <Heading level="h3">With custom separator</Heading>
+        <Heading level="h3">自定义分隔符</Heading>
         <Breadcrumbs>
-          <BreadcrumbsItem href="/" label="Home">
+          <BreadcrumbsItem href="/" label="首页">
             <span slot="separator" class="separator" aria-hidden="true">
               <Icon aria-hidden="true" name="lucide:chevron-right" />
             </span>
           </BreadcrumbsItem>
-          <BreadcrumbsItem href="/docs" label="Documentation">
+          <BreadcrumbsItem href="/docs" label="文档">
             <span slot="separator" class="separator" aria-hidden="true">
               <Icon aria-hidden="true" name="lucide:chevron-right" />
             </span>
           </BreadcrumbsItem>
-          <BreadcrumbsItem label="Breadcrumbs" currentPage={true} />
+          <BreadcrumbsItem label="面包屑" currentPage={true} />
         </Breadcrumbs>
-        <Heading level="h3">With custom home icon</Heading>
+        <Heading level="h3">自定义首页图标</Heading>
         <Breadcrumbs>
-          <BreadcrumbsItem href="/" label="Home" hasIcon>
+          <BreadcrumbsItem href="/" label="首页" hasIcon>
             <Icon aria-hidden="true" name="lucide:home" slot="icon" />
             <span slot="separator" class="separator" aria-hidden="true">
               <Icon aria-hidden="true" name="lucide:chevron-right" />
             </span>
           </BreadcrumbsItem>
-          <BreadcrumbsItem href="/docs" label="Documentation">
+          <BreadcrumbsItem href="/docs" label="文档">
             <span slot="separator" class="separator" aria-hidden="true">
               <Icon aria-hidden="true" name="lucide:chevron-right" />
             </span>
           </BreadcrumbsItem>
-          <BreadcrumbsItem label="Breadcrumbs" currentPage={true} />
+          <BreadcrumbsItem label="面包屑" currentPage={true} />
         </Breadcrumbs>
 
-        <Heading level="h2" id="button">Button</Heading>
-        <p>The Button component is used to display a button with a type and a pulse effect.</p>
-        <Heading level="h3">Default</Heading>
+        <Heading level="h2" id="button">按钮</Heading>
+        <p>按钮用于触发主要操作，支持不同类型与状态，并可通过动效增强反馈。</p>
+        <Heading level="h3">默认</Heading>
         <div class="flex flex-wrap gap-2">
-          <Button pulse>Default button</Button>
-          <Button type="primary" pulse>Primary button</Button>
-          <Button type="secondary">Secondary button</Button>
-          <Button type="info">Info button</Button>
-          <Button type="success">Success button</Button>
-          <Button type="warning">Warning button</Button>
-          <Button type="error">Error button</Button>
+          <Button pulse>默认按钮</Button>
+          <Button type="primary" pulse>主要按钮</Button>
+          <Button type="secondary">次要按钮</Button>
+          <Button type="info">信息按钮</Button>
+          <Button type="success">成功按钮</Button>
+          <Button type="warning">警告按钮</Button>
+          <Button type="error">错误按钮</Button>
         </div>
-        <Heading level="h3">Outline</Heading>
+        <Heading level="h3">描边</Heading>
         <div class="flex flex-wrap gap-2">
-          <Button type="primary" variant="outlined">Outline primary button</Button>
-          <Button type="secondary" variant="outlined">Outline secondary button</Button>
-          <Button type="info" variant="outlined">Outline info button</Button>
-          <Button type="success" variant="outlined">Outline success button</Button>
-          <Button type="warning" variant="outlined">Outline warning button</Button>
-          <Button type="error" variant="outlined">Outline error button</Button>
+          <Button type="primary" variant="outlined">主要描边按钮</Button>
+          <Button type="secondary" variant="outlined">次要描边按钮</Button>
+          <Button type="info" variant="outlined">信息描边按钮</Button>
+          <Button type="success" variant="outlined">成功描边按钮</Button>
+          <Button type="warning" variant="outlined">警告描边按钮</Button>
+          <Button type="error" variant="outlined">错误描边按钮</Button>
         </div>
-        <Heading level="h3">Sizes</Heading>
+        <Heading level="h3">尺寸</Heading>
         <div class="align-center flex flex-wrap gap-2">
-          <Button type="primary" size="sm">Small button</Button>
-          <Button type="primary" size="md">Medium button</Button>
-          <Button type="primary" size="lg">Large button</Button>
+          <Button type="primary" size="sm">小按钮</Button>
+          <Button type="primary" size="md">中按钮</Button>
+          <Button type="primary" size="lg">大按钮</Button>
         </div>
-        <Heading level="h3">Icon</Heading>
+        <Heading level="h3">图标</Heading>
         <div class="flex flex-wrap gap-2">
-          <Button><Icon aria-hidden="true" name="lucide:sparkles" size="24" />Icon button</Button>
+          <Button><Icon aria-hidden="true" name="lucide:sparkles" size="24" />图标按钮</Button>
           <Button animateOnHover
-            ><Icon aria-hidden="true" name="lucide:sparkles" size="24" />Animated icon button</Button
+            ><Icon aria-hidden="true" name="lucide:sparkles" size="24" />带动效的图标按钮</Button
           >
         </div>
 
-        <Heading level="h2" id="card">Card</Heading>
-        <p>The Card component is used to display a card with a title, footer, and a media.</p>
+        <Heading level="h2" id="card">卡片</Heading>
+        <p>卡片用于展示结构化内容，可包含媒体、标题、摘要与页脚信息。</p>
         <Card
           img="https://images.unsplash.com/photo-1620428268482-cf1851a36764?auto=format&fit=crop&q=100&w=800"
-          title="Card Title"
-          footer="Author name"
+          title="卡片标题"
+          footer="作者：示例"
         >
           <span slot="meta">
             <Icon aria-hidden="true" name="lucide:clock" />
-            10 min read
+            10 分钟阅读
           </span>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quasi nobis optio? Qui in quo accusantium debitis
-          sapiente obcaecati magnam incidunt sit. Molestiae exercitationem quibusdam quod veritatis laboriosam est tenetur.
+          这里是卡片正文示例，可用于展示文章摘要、案例简介或产品亮点说明。
         </Card>
 
-        <Heading level="h2" id="darkmode">Dark mode toggle</Heading>
-        <p>The Dark mode toggle component is used to toggle the dark mode of the page.</p>
-        <Heading level="h3">Default</Heading>
+        <Heading level="h2" id="darkmode">深色模式切换</Heading>
+        <p>用于切换页面的深色模式，尊重用户偏好并保持可读性。</p>
+        <Heading level="h3">默认</Heading>
         <DarkMode />
-        <Heading level="h3">Custom icons</Heading>
+        <Heading level="h3">自定义图标</Heading>
         <DarkMode>
           <Icon aria-hidden="true" name="lucide:sunrise" slot="light" />
           <Icon aria-hidden="true" name="lucide:sunset" slot="dark" />
         </DarkMode>
 
-        <Heading level="h2" id="form">Form</Heading>
+        <Heading level="h2" id="form">表单</Heading>
         <p>
-          The Form component is used to display a form with a name, email, message, and a submit button. It has WCAG 2.2
-          AA compliant validation by default.
+          表单用于收集用户信息。示例包含必填校验、错误提示与键盘可用性等基础能力，可按业务需求扩展字段。
         </p>
         <Form>
-          <Input label="Name" required />
-          <Input label="Email" required />
-          <Textarea label="Message" required />
+          <Input label="姓名" required />
+          <Input label="邮箱" required />
+          <Textarea label="留言" required />
           <Fieldset
             name="interests"
-            legend="What are you interested in?"
+            legend="你感兴趣的方向"
             required
-            data-validation="Please select at least one area of interest"
+            data-validation="请至少选择一个方向"
           >
-            <Checkbox name="accessibility" value="a11y" label="Accessibility and inclusive design" />
-            <Checkbox name="wcag-compliance" value="wcag" label="WCAG compliance and testing" />
-            <Checkbox name="screen-reader" value="sr" label="Screen reader optimization" />
-            <Checkbox name="keyboard-nav" value="keyboard" label="Keyboard navigation" />
+            <Checkbox name="accessibility" value="a11y" label="官网建设与品牌升级" />
+            <Checkbox name="wcag-compliance" value="wcag" label="系统/后台开发与集成" />
+            <Checkbox name="screen-reader" value="sr" label="性能优化与工程化改造" />
+            <Checkbox name="keyboard-nav" value="keyboard" label="无障碍与可用性提升" />
           </Fieldset>
 
           <!-- Radio group (shared names) -->
-          <Fieldset name="experience" legend="Your experience level" required>
-            <Radio name="experience" value="beginner" label="Beginner" />
-            <Radio name="experience" value="intermediate" label="Intermediate" />
-            <Radio name="experience" value="advanced" label="Advanced" />
+          <Fieldset name="experience" legend="项目紧急程度" required>
+            <Radio name="experience" value="beginner" label="尽快启动" />
+            <Radio name="experience" value="intermediate" label="1–2 个月内" />
+            <Radio name="experience" value="advanced" label="先规划" />
           </Fieldset>
-          <Button htmlType="submit">Submit</Button>
+          <Button htmlType="submit">提交</Button>
         </Form>
 
-        <Heading level="h2" id="heading">Heading</Heading>
-        <p>Headings are used to structure the content of a page. They should be used in the following order:</p>
+        <Heading level="h2" id="heading">标题</Heading>
+        <p>标题用于组织内容层级，应按 h1→h6 的语义顺序使用，便于理解与导航。</p>
         <div class="flex-col flex-wrap gap-4">
-          <Heading level="h1">Heading 1</Heading>
-          <Heading level="h2">Heading 2</Heading>
-          <Heading level="h3">Heading 3</Heading>
-          <Heading level="h4">Heading 4</Heading>
-          <Heading level="h5">Heading 5</Heading>
-          <Heading level="h6">Heading 6</Heading>
+          <Heading level="h1">标题 1</Heading>
+          <Heading level="h2">标题 2</Heading>
+          <Heading level="h3">标题 3</Heading>
+          <Heading level="h4">标题 4</Heading>
+          <Heading level="h5">标题 5</Heading>
+          <Heading level="h6">标题 6</Heading>
         </div>
 
-        <Heading level="h2" id="highcontrast">High contrast toggle</Heading>
-        <p>The High contrast toggle component is used to toggle the high contrast mode of the page.</p>
-        <Heading level="h3">Default</Heading>
+        <Heading level="h2" id="highcontrast">高对比度切换</Heading>
+        <p>用于切换高对比度模式，提升低视力用户的可读性。</p>
+        <Heading level="h3">默认</Heading>
         <HighContrast />
-        <Heading level="h3">Custom icons</Heading>
+        <Heading level="h3">自定义图标</Heading>
         <HighContrast>
           <Icon aria-hidden="true" name="lucide:eye" slot="off" />
           <Icon aria-hidden="true" name="lucide:contrast" slot="on" />
         </HighContrast>
 
-        <Heading level="h2" id="link">Link</Heading>
-        <p>The Link component is used to display a link with a type and a color.</p>
-        <Heading level="h3">Default</Heading>
-        <Link href="/">Default link</Link>
-        <Heading level="h3">External</Heading>
-        <Link href="/" isExternal>External link</Link>
-        <Heading level="h3">Link as button</Heading>
+        <Heading level="h2" id="link">链接</Heading>
+        <p>链接用于站内/站外跳转。对外链应明确提示“新标签页打开”。</p>
+        <Heading level="h3">默认</Heading>
+        <Link href="/">默认链接</Link>
+        <Heading level="h3">外部链接</Heading>
+        <Link href="/" isExternal>外部链接</Link>
+        <Heading level="h3">按钮样式</Heading>
         <div class="flex flex-wrap gap-2">
-          <Link href="/" isButton>Default button link</Link>
-          <Link href="/" isButton type="primary">Primary button link</Link>
-          <Link href="/" isButton type="secondary">Secondary button link</Link>
-          <Link href="/" isButton type="info">Info button link</Link>
-          <Link href="/" isButton type="success">Success button link</Link>
-          <Link href="/" isButton type="warning">Warning button link</Link>
-          <Link href="/" isButton type="error">Error button link</Link>
+          <Link href="/" isButton>默认按钮链接</Link>
+          <Link href="/" isButton type="primary">主要按钮链接</Link>
+          <Link href="/" isButton type="secondary">次要按钮链接</Link>
+          <Link href="/" isButton type="info">信息按钮链接</Link>
+          <Link href="/" isButton type="success">成功按钮链接</Link>
+          <Link href="/" isButton type="warning">警告按钮链接</Link>
+          <Link href="/" isButton type="error">错误按钮链接</Link>
         </div>
-        <Heading level="h3">Outline button</Heading>
+        <Heading level="h3">描边按钮</Heading>
         <div class="flex flex-wrap gap-2">
-          <Link href="/" isButton type="primary" variant="outlined">Outline primary button link</Link>
-          <Link href="/" isButton type="secondary" variant="outlined">Outline secondary button link</Link>
-          <Link href="/" isButton type="info" variant="outlined">Outline info button link</Link>
-          <Link href="/" isButton type="success" variant="outlined">Outline success button link</Link>
-          <Link href="/" isButton type="warning" variant="outlined">Outline warning button link</Link>
-          <Link href="/" isButton type="error" variant="outlined">Outline error button link</Link>
+          <Link href="/" isButton type="primary" variant="outlined">主要描边按钮链接</Link>
+          <Link href="/" isButton type="secondary" variant="outlined">次要描边按钮链接</Link>
+          <Link href="/" isButton type="info" variant="outlined">信息描边按钮链接</Link>
+          <Link href="/" isButton type="success" variant="outlined">成功描边按钮链接</Link>
+          <Link href="/" isButton type="warning" variant="outlined">警告描边按钮链接</Link>
+          <Link href="/" isButton type="error" variant="outlined">错误描边按钮链接</Link>
         </div>
-        <Heading level="h3">Icon</Heading>
+        <Heading level="h3">图标</Heading>
         <div class="flex flex-wrap gap-2">
           <Link href="/" isButton type="default">
             <Icon aria-hidden="true" name="lucide:link" />
-            Icon button link</Link
+            图标按钮链接</Link
           >
           <Link href="/" isButton animateOnHover animationType="boop" type="primary">
             <Icon aria-hidden="true" name="lucide:link" />
-            Animated icon button link</Link
+            带动效的图标按钮链接</Link
           >
         </div>
 
-        <Heading level="h2" id="media">Media</Heading>
+        <Heading level="h2" id="media">媒体</Heading>
         <Media
           class="rounded-lg"
           src="https://images.unsplash.com/photo-1620428268482-cf1851a36764?auto=format&fit=crop&q=100&w=800"
         />
 
-        <Heading level="h2" id="modals">Modals</Heading>
-        <p>The Modals component is used to display a modal with a title and a content.</p>
-        <button id="modal1-trigger" class="button">Modal 1</button>&nbsp;
-        <button id="modal2-trigger" class="button color-secondary">Modal 2</button>
-        <Modal triggerId="modal1-trigger" title="Modal 1">
-          <p>Why hello, I be the <strong>first</strong> Modal.</p>
+        <Heading level="h2" id="modals">弹窗</Heading>
+        <p>弹窗用于展示重要信息或收集确认操作，应注意焦点管理与关闭方式。</p>
+        <button id="modal1-trigger" class="button">弹窗 1</button>&nbsp;
+        <button id="modal2-trigger" class="button color-secondary">弹窗 2</button>
+        <Modal triggerId="modal1-trigger" title="弹窗 1">
+          <p>你好，我是<strong>第一个</strong>弹窗示例。</p>
         </Modal>
-        <Modal triggerId="modal2-trigger" title="Modal 2" closeText="Close Modal">
+        <Modal triggerId="modal2-trigger" title="弹窗 2" closeText="关闭弹窗">
           <p>
-            Ah yes, and I be the <strong>second</strong> Modal. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Sed, a! Ratione eaque temporibus alias tempora pariatur dolorem.
+            我是<strong>第二个</strong>弹窗示例。这里可以放置更长的说明文本，并在需要时提供明确的确认/取消操作。
           </p>
-          <button class="button" onclick="closeModal()">Confirm action</button>
+          <button class="button" onclick="closeModal()">确认操作</button>
         </Modal>
 
-        <Heading level="h2" id="notification">Notification</Heading>
-        <p>The Notification component is used to display a notification with a type and a message.</p>
-        <Heading level="h3">Default</Heading>
+        <Heading level="h2" id="notification">通知</Heading>
+        <p>通知用于反馈系统状态或操作结果，可区分信息/成功/警告/错误等类型。</p>
+        <Heading level="h3">默认</Heading>
         <Notification>
-          <Icon aria-hidden="true" name="lucide:bell" /><p><strong>Message:</strong> This is a notification!</p>
+          <Icon aria-hidden="true" name="lucide:bell" /><p><strong>提示：</strong>这是一条通知。</p>
         </Notification>
         <Notification role="status" type="info">
           <Icon aria-hidden="true" name="lucide:info" /><p>
-            <strong>Info:</strong> This is a notification of type info.
+            <strong>信息：</strong>这是一条信息通知。
           </p>
         </Notification>
         <Notification role="status" type="success">
           <Icon aria-hidden="true" name="lucide:circle-check" /><p>
-            <strong>Success:</strong> This is a notification of type success.
+            <strong>成功：</strong>操作已完成。
           </p>
         </Notification>
         <Notification role="status" type="warning">
           <Icon aria-hidden="true" name="lucide:triangle-alert" /><p>
-            <strong>Warning:</strong> This is a notification of type warning and goes on multiple lines to see how that looks.
+            <strong>提醒：</strong>这是一条警告通知，用于展示多行内容的呈现效果。
           </p>
         </Notification>
         <Notification role="alert" type="error">
           <Icon aria-hidden="true" name="lucide:circle-x" /><p>
-            <strong>Error:</strong> This is a notification of type error.
+            <strong>错误：</strong>操作失败，请稍后重试。
           </p>
         </Notification>
 
-        <Heading level="h3">Accent</Heading>
+        <Heading level="h3">强调样式</Heading>
         <Notification variant="accent" element="aside" role="region">
-          <p><strong>Message:</strong> This is a notification!</p>
+          <p><strong>提示：</strong>这是一条通知。</p>
         </Notification>
         <Notification type="info" variant="accent" element="aside" role="region">
           <p>
-            <strong>Info:</strong> This is a notification of type info.
+            <strong>信息：</strong>这是一条信息通知。
           </p>
         </Notification>
         <Notification type="success" variant="accent" element="aside" role="region">
           <p>
-            <strong>Success:</strong> This is a notification of type success.
+            <strong>成功：</strong>操作已完成。
           </p>
         </Notification>
         <Notification type="warning" variant="accent" element="aside" role="region">
           <p>
-            <strong>Warning:</strong> This is a notification of type warning and goes on multiple lines to see how that looks.
+            <strong>提醒：</strong>这是一条警告通知，用于展示多行内容的呈现效果。
           </p>
         </Notification>
         <Notification type="error" variant="accent" element="aside" role="region">
           <p>
-            <strong>Error:</strong> This is a notification of type error.
+            <strong>错误：</strong>操作失败，请稍后重试。
           </p>
         </Notification>
 
-        <Heading level="h2" id="pagination">Pagination</Heading>
-        <p>The Pagination component is used to display a pagination with a total number of pages.</p>
+        <Heading level="h2" id="pagination">分页</Heading>
+        <p>分页用于在列表内容较多时分段展示，并提供清晰的当前位置与可到达范围。</p>
         <Pagination totalPages="200" />
 
-        <Heading level="h2" id="reducedmotion">Reduced motion toggle</Heading>
-        <p>The Reduced motion toggle component is used to toggle the reduced motion mode of the page.</p>
-        <Heading level="h3">Default</Heading>
+        <Heading level="h2" id="reducedmotion">减少动效切换</Heading>
+        <p>用于切换减少动效模式，尊重用户的动效偏好设置。</p>
+        <Heading level="h3">默认</Heading>
         <ReducedMotion />
-        <Heading level="h3">Custom icons</Heading>
+        <Heading level="h3">自定义图标</Heading>
         <ReducedMotion>
           <Icon aria-hidden="true" name="lucide:activity" slot="off" />
           <Icon aria-hidden="true" name="lucide:pause" slot="on" />
         </ReducedMotion>
 
-        <Heading level="h2" id="skiplink">Skip link</Heading>
+        <Heading level="h2" id="skiplink">跳转链接（Skip link）</Heading>
         <p>
-          The SkipLink component becomes visible when you shift+tab to navigate backward through the page, it's the
-          first focusable element on the page.
+          “跳转到正文”链接会在键盘导航时出现，帮助用户跳过导航直接进入主要内容，是无障碍的重要细节之一。
         </p>
 
-        <Heading level="h2" id="tabs">Tabs</Heading>
-        <p>The Tabs component is used to display a tabs with a list of tabs and a list of panels.</p>
+        <Heading level="h2" id="tabs">标签页</Heading>
+        <p>标签页用于在同一页面内切换内容面板，需支持键盘操作与清晰的选中状态。</p>
         <Tabs>
           <TabsList>
-            <TabsTab id="tab-1" controls="panel-1" selected>First Panel</TabsTab>
-            <TabsTab id="tab-2" controls="panel-2">Second Panel</TabsTab>
-            <TabsTab id="tab-3" controls="panel-3">Third Panel</TabsTab>
+            <TabsTab id="tab-1" controls="panel-1" selected>面板一</TabsTab>
+            <TabsTab id="tab-2" controls="panel-2">面板二</TabsTab>
+            <TabsTab id="tab-3" controls="panel-3">面板三</TabsTab>
           </TabsList>
 
           <TabsPanel id="panel-1" labelledby="tab-1" selected>
-            <Heading level="h3">First Panel</Heading>
+            <Heading level="h3">面板一</Heading>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quasi nobis optio? Qui in quo
-              accusantium debitis sapiente obcaecati magnam incidunt sit. Molestiae exercitationem quibusdam quod
-              veritatis laboriosam est tenetur. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed eveniet
-              quidem earum at nobis enim.
+              这里是示例内容。标签页适合承载同一主题下的不同维度信息，例如：产品介绍/功能列表/常见问题。
             </p>
-            <a href="#">Tab to me!</a>
+            <a href="#">用 Tab 键聚焦到我</a>
           </TabsPanel>
           <TabsPanel id="panel-2" labelledby="tab-2">
-            <Heading level="h3">Second Panel</Heading>
+            <Heading level="h3">面板二</Heading>
             <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
               <Media
                 class="rounded-lg"
@@ -555,40 +526,30 @@ const components = [
               />
             </div>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quasi nobis optio? Qui in quo
-              accusantium debitis sapiente obcaecati magnam incidunt sit. Molestiae exercitationem quibusdam quod
-              veritatis laboriosam est tenetur. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed eveniet
-              quidem earum at nobis enim.
+              示例内容：当面板包含多媒体内容时，依然应保证键盘可达与可读替代信息。
             </p>
-            <a href="#">Tab to me!</a>
+            <a href="#">用 Tab 键聚焦到我</a>
           </TabsPanel>
           <TabsPanel id="panel-3" labelledby="tab-3">
-            <Heading level="h3">Third Panel</Heading>
+            <Heading level="h3">面板三</Heading>
             <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Tenetur, nulla! Sapiente saepe voluptate nemo in
-              id aperiam tempore quo unde, ipsum similique explicabo non maiores qui voluptates dolore obcaecati. Atque
-              voluptates similique ad ipsam nostrum quibusdam doloremque cum porro, aperiam beatae voluptas dolore et
-              neque voluptate alias nesciunt blanditiis totam voluptatem necessitatibus. Similique aliquid molestiae
-              iusto nam nobis ut aspernatur blanditiis provident iste corporis minima, quidem autem nulla doloremque
-              eaque a obcaecati! Nisi quod quam repellendus facilis? Libero voluptas doloribus maxime, suscipit odio
-              veritatis optio nulla officia quos cum at ea hic numquam perferendis molestiae! Aperiam quia veritatis
-              earum tempora.
+              示例内容：较长文本建议分段或使用列表结构，避免大段堆叠影响阅读。
             </p>
-            <a href="#">Tab to me!</a>
+            <a href="#">用 Tab 键聚焦到我</a>
           </TabsPanel>
         </Tabs>
 
-        <Heading level="h2" id="video">Video</Heading>
-        <p>The Video component is used to display a video with a title and a source.</p>
-        <Heading level="h3">Default</Heading>
-        <Video src="https://www.youtube.com/watch?v=j8K-ESJF814" title="Video" />
+        <Heading level="h2" id="video">视频</Heading>
+        <p>视频组件用于嵌入可访问的视频内容，建议提供清晰标题与必要的字幕信息。</p>
+        <Heading level="h3">默认</Heading>
+        <Video src="https://www.youtube.com/watch?v=j8K-ESJF814" title="视频" />
 
-        <Heading level="h3">Aspect ratio</Heading>
-        <Video src="https://www.youtube.com/watch?v=j8K-ESJF814" title="Video" ratio="1:1" />
+        <Heading level="h3">宽高比</Heading>
+        <Video src="https://www.youtube.com/watch?v=j8K-ESJF814" title="视频" ratio="1:1" />
       </div>
       <div class="components-navigation space-content">
-        <Heading level="h3" size="h4">On this page</Heading>
-        <nav aria-label="On this page">
+        <Heading level="h3" size="h4">本页目录</Heading>
+        <nav aria-label="本页目录">
           <ul class="list-none">
             {
               components.map((component) => (

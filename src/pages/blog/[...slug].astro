@@ -1,0 +1,149 @@
+---
+import DefaultLayout from '@layouts/DefaultLayout.astro'
+import PageHeader from '@components/PageHeader.astro'
+import SocialShares from '@components/SocialShares.astro'
+import { Heading } from 'accessible-astro-components'
+
+export function getStaticPaths() {
+  // 返回空数组，所有路径都会被捕获并在客户端处理
+  return []
+}
+---
+
+<DefaultLayout title="加载中..." description="正在加载文章内容...">
+  <div id="article-container">
+    <!-- 加载状态 -->
+    <div id="loading" class="text-center py-24">
+      <div class="inline-block animate-spin rounded-full h-16 w-16 border-b-2 border-primary"></div>
+      <p class="mt-6 text-xl">加载中...</p>
+    </div>
+
+    <!-- 错误状态 -->
+    <div id="error" class="hidden text-center py-24">
+      <p class="text-xl text-red-600 mb-4">加载失败</p>
+      <p class="text-gray-600 mb-6">文章不存在或服务暂时不可用</p>
+      <a href="/blog" class="inline-block px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark">
+        返回列表
+      </a>
+    </div>
+
+    <!-- 文章内容 -->
+    <div id="content" class="hidden">
+      <PageHeader
+        id="page-header"
+        title="加载中..."
+        subtitle=""
+        bgType="bordered"
+      />
+      
+      <section class="my-12">
+        <div class="narrow container">
+          <div id="article-content" class="prose prose-lg max-w-none"></div>
+        </div>
+      </section>
+
+      <section class="my-12">
+        <div class="narrow space-content container">
+          <Heading level="h2">分享此文章</Heading>
+          <p>欢迎转发给同事或朋友，让更多人了解我们的内容与实践。</p>
+          <SocialShares />
+        </div>
+      </section>
+    </div>
+  </div>
+</DefaultLayout>
+
+<script>
+  import { getNews } from '@utils/clientApi'
+
+  const loading = document.getElementById('loading')!
+  const error = document.getElementById('error')!
+  const content = document.getElementById('content')!
+  const articleContent = document.getElementById('article-content')!
+
+  async function loadArticle() {
+    loading.classList.remove('hidden')
+    error.classList.add('hidden')
+    content.classList.add('hidden')
+
+    try {
+      // 从 URL 路径中提取 ID
+      const pathParts = window.location.pathname.split('/')
+      const slug = pathParts[pathParts.length - 1] || pathParts[pathParts.length - 2]
+      const newsId = parseInt(slug.split('-')[0])
+      
+      if (isNaN(newsId)) {
+        throw new Error('Invalid article ID')
+      }
+
+      const response = await getNews(1, 100)
+      const article = response.data.find(news => news.id === newsId)
+
+      if (!article) {
+        throw new Error('Article not found')
+      }
+
+      const formattedDate = new Date(article.created_at).toLocaleDateString('zh-CN', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      })
+
+      // 更新页面标题
+      document.title = `${article.title} - 资讯中心`
+
+      // 更新 PageHeader
+      const pageHeader = document.querySelector('#page-header')
+      if (pageHeader) {
+        const titleEl = pageHeader.querySelector('h1')
+        const subtitleEl = pageHeader.querySelector('.subtitle')
+        if (titleEl) titleEl.textContent = article.title
+        if (subtitleEl) {
+          subtitleEl.innerHTML = `${formattedDate} · 作者：${article.author} · 浏览量：${article.views}`
+        }
+      }
+
+      // 渲染文章内容
+      articleContent.innerHTML = `
+        <div class="text-2xl leading-relaxed mb-8">
+          ${article.content.split('\n').map(p => `<p class="mb-4">${p}</p>`).join('')}
+        </div>
+        
+        <div class="mt-12 p-6 bg-gray-50 dark:bg-gray-800 rounded-lg">
+          <h3 class="text-lg font-bold mb-2">文章信息</h3>
+          <ul class="text-sm space-y-1">
+            <li><strong>发布时间：</strong>${formattedDate}</li>
+            <li><strong>作者：</strong>${article.author}</li>
+            <li><strong>浏览量：</strong>${article.views}</li>
+          </ul>
+        </div>
+      `
+
+      loading.classList.add('hidden')
+      content.classList.remove('hidden')
+    } catch (err) {
+      console.error('Failed to load article:', err)
+      loading.classList.add('hidden')
+      error.classList.remove('hidden')
+    }
+  }
+
+  loadArticle()
+</script>
+
+<style>
+  .narrow {
+    margin-inline: auto;
+    max-width: 65ch;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .animate-spin {
+    animation: spin 1s linear infinite;
+  }
+</style>

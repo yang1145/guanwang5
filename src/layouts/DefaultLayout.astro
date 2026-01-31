@@ -56,7 +56,7 @@ const imagePath = image ? (typeof image === 'string' ? image : image.src) : '/so
 const imageUrl = new URL(imagePath, Astro.site).href
 ---
 
-<html lang="en" dir="ltr">
+<html lang="zh-CN" dir="ltr">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -159,5 +159,38 @@ const imageUrl = new URL(imagePath, Astro.site).href
         }
       }
     </style>
+
+    <script>
+      import { getSiteConfig } from '@utils/clientApi'
+
+      async function updateSiteTitle() {
+        try {
+          const response = await getSiteConfig()
+          const config = response.data
+
+          // 更新网站标题（如果当前标题包含网站名称）
+          if (config.site_title && document.title) {
+            // 保存当前页面标题（不含网站名）
+            const currentPageTitle = document.title.split(' - ')[0] || document.title.split(' | ')[0]
+            
+            // 如果有页面标题，格式为 "页面标题 - 网站名称"
+            if (currentPageTitle !== document.title) {
+              document.title = `${currentPageTitle} - ${config.site_title}`
+            } else {
+              // 如果只有网站标题，直接使用
+              document.title = config.site_title
+            }
+          }
+        } catch (error) {
+          console.error('Failed to update site title:', error)
+        }
+      }
+
+      // 页面加载完成后更新标题
+      updateSiteTitle()
+      
+      // 监听页面切换事件
+      document.addEventListener('astro:page-load', updateSiteTitle)
+    </script>
   </body>
 </html>

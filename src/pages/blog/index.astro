@@ -1,0 +1,200 @@
+---
+import DefaultLayout from '@layouts/DefaultLayout.astro'
+import PageHeader from '@components/PageHeader.astro'
+---
+
+<DefaultLayout
+  title="资讯中心"
+  description="分享产品动态、行业洞察与交付经验。"
+>
+  <PageHeader
+    title="资讯中心"
+    subtitle="在这里发布新闻动态、技术文章与最佳实践，持续输出可复用的经验与方法。"
+    bgType="bordered"
+  />
+
+  <section class="my-12">
+    <div class="container">
+      <!-- 加载状态 -->
+      <div id="loading" class="text-center py-12">
+        <div class="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+        <p class="mt-4 text-lg">加载中...</p>
+      </div>
+
+      <!-- 错误状态 -->
+      <div id="error" class="hidden text-center py-12">
+        <p class="text-lg text-red-600">加载失败，请稍后重试</p>
+        <button id="retry-btn" class="mt-4 px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary-dark">
+          重试
+        </button>
+      </div>
+
+      <!-- 内容区域 -->
+      <div id="content" class="hidden">
+        <p id="post-count" class="text-sm mb-4"></p>
+        <ul id="post-list" class="my-3 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"></ul>
+        
+        <!-- 分页 -->
+        <div id="pagination" class="mt-12 hidden">
+          <nav class="flex justify-center items-center gap-4" aria-label="资讯列表分页">
+            <button id="prev-page" class="px-4 py-2 border rounded-lg hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed">
+              上一页
+            </button>
+            <span id="page-info" class="text-sm"></span>
+            <button id="next-page" class="px-4 py-2 border rounded-lg hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed">
+              下一页
+            </button>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
+</DefaultLayout>
+
+<script>
+  import { getNews } from '@utils/clientApi'
+  import type { NewsItem } from '@utils/clientApi'
+
+  const PAGE_SIZE = 6
+  let currentPage = 1
+  let totalPages = 1
+
+  const loading = document.getElementById('loading')!
+  const error = document.getElementById('error')!
+  const content = document.getElementById('content')!
+  const postList = document.getElementById('post-list')!
+  const postCount = document.getElementById('post-count')!
+  const pagination = document.getElementById('pagination')!
+  const pageInfo = document.getElementById('page-info')!
+  const prevBtn = document.getElementById('prev-page') as HTMLButtonElement
+  const nextBtn = document.getElementById('next-page') as HTMLButtonElement
+  const retryBtn = document.getElementById('retry-btn')!
+
+  const postImages = [
+    '/posts/post-image-1.png',
+    '/posts/post-image-2.png',
+    '/posts/post-image-3.png',
+    '/posts/post-image-4.png',
+    '/posts/post-image-5.png',
+    '/posts/post-image-6.png',
+  ]
+
+  function truncateTitle(title: string): string {
+    const words = title.split(' ')
+    if (words.length <= 8) return title
+    return words.slice(0, 8).join(' ') + '...'
+  }
+
+  function slugify(text: string): string {
+    return text
+      .toLowerCase()
+      .replace(/[^\w\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .trim()
+  }
+
+  function renderPostCard(news: NewsItem): string {
+    const truncatedTitle = truncateTitle(news.title)
+    const shortUrl = slugify(news.id + '-' + truncatedTitle)
+    const imageUrl = news.image_url || postImages[news.id % postImages.length]
+    const excerpt = news.content.substring(0, 150) + (news.content.length > 150 ? '...' : '')
+
+    return `
+      <li>
+        <article class="card h-full flex flex-col border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+          <a href="/blog/${shortUrl}" class="block">
+            <img src="${imageUrl}" alt="" class="w-full h-48 object-cover" loading="lazy" />
+          </a>
+          <div class="p-6 flex-1 flex flex-col">
+            <h2 class="text-xl font-bold mb-2">
+              <a href="/blog/${shortUrl}" class="hover:text-primary">${truncatedTitle}</a>
+            </h2>
+            <p class="text-gray-600 mb-4 flex-1">${excerpt}</p>
+            <p class="text-sm text-gray-500">作者：${news.author} · 浏览量：${news.views}</p>
+          </div>
+        </article>
+      </li>
+    `
+  }
+
+  async function loadPosts(page: number = 1) {
+    loading.classList.remove('hidden')
+    error.classList.add('hidden')
+    content.classList.add('hidden')
+
+    try {
+      const response = await getNews(page, PAGE_SIZE)
+      const { data, pagination: paginationData } = response
+
+      if (paginationData) {
+        currentPage = paginationData.page
+        totalPages = paginationData.totalPages
+        const start = (currentPage - 1) * PAGE_SIZE + 1
+        const end = Math.min(start + data.length - 1, paginationData.total)
+        
+        postCount.innerHTML = `<em>第 ${start}–${end} 篇（共 ${paginationData.total} 篇）</em>`
+        pageInfo.textContent = `第 ${currentPage} / ${totalPages} 页`
+        
+        prevBtn.disabled = currentPage === 1
+        nextBtn.disabled = currentPage === totalPages
+
+        if (totalPages > 1) {
+          pagination.classList.remove('hidden')
+        }
+      }
+
+      postList.innerHTML = data.map(renderPostCard).join('')
+
+      loading.classList.add('hidden')
+      content.classList.remove('hidden')
+    } catch (err) {
+      console.error('Failed to load posts:', err)
+      loading.classList.add('hidden')
+      error.classList.remove('hidden')
+    }
+  }
+
+  // 事件监听
+  prevBtn.addEventListener('click', () => {
+    if (currentPage > 1) {
+      loadPosts(currentPage - 1)
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  })
+
+  nextBtn.addEventListener('click', () => {
+    if (currentPage < totalPages) {
+      loadPosts(currentPage + 1)
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  })
+
+  retryBtn.addEventListener('click', () => {
+    loadPosts(currentPage)
+  })
+
+  // 初始加载
+  loadPosts(1)
+</script>
+
+<style>
+  .card {
+    background-color: var(--background-color);
+    border-color: var(--border-color-subtle);
+  }
+
+  .card:hover {
+    border-color: var(--primary-color);
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .animate-spin {
+    animation: spin 1s linear infinite;
+  }
+</style>

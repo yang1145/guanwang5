@@ -2,74 +2,73 @@
 import DefaultLayout from '@layouts/DefaultLayout.astro'
 import PageHeader from '@components/PageHeader.astro'
 import { Heading, Notification } from 'accessible-astro-components'
-import { getCollection } from 'astro:content'
 
-// Get all portfolio projects
-const projects = await getCollection('projects')
+// 站点地图不再从 API 获取数据，改为客户端渲染
+const projects: any[] = []
 
 // Define static pages with their descriptions
 const staticPages = [
   {
-    title: 'Home',
+    title: '首页',
     url: '/',
-    description: 'Welcome to our accessible website featuring modern web development and inclusive design principles.',
+    description: '公司官网首页：展示核心能力、案例亮点与关键联系方式。',
   },
   {
-    title: 'Accessible components',
+    title: '组件展示',
     url: '/accessible-components',
-    description: 'A comprehensive showcase of accessible UI components and design patterns for modern web development.',
+    description: '组件与交互示例页面，用于展示可复用组件与无障碍实践。',
   },
   {
-    title: 'Portfolio',
+    title: '案例展示',
     url: '/portfolio',
-    description: 'A collection of projects demonstrating accessible design and development practices.',
+    description: '案例列表页：按标签筛选并查看项目详情。',
   },
   {
-    title: 'Blog',
+    title: '资讯中心',
     url: '/blog',
-    description: 'Articles and insights about web accessibility, development best practices, and inclusive design.',
+    description: '新闻动态与洞察：发布产品更新、技术文章与最佳实践。',
   },
   {
-    title: 'Contact',
+    title: '联系我们',
     url: '/contact',
     description:
-      'Get in touch with us for accessibility consulting, development services, or collaboration opportunities.',
+      '欢迎联系咨询：官网建设、系统交付、性能优化与无障碍改造等合作需求。',
   },
   {
-    title: 'Color contrast checker',
+    title: '色彩对比度检测',
     url: '/color-contrast-checker',
-    description: 'An interactive tool to check color contrast ratios and ensure WCAG compliance for your designs.',
+    description: '交互式对比度检测工具，帮助评估配色在不同主题下的可读性。',
   },
   {
-    title: 'Accessibility statement',
+    title: '无障碍声明',
     url: '/accessibility-statement',
-    description: 'Our commitment to accessibility and information about the accessibility features of this website.',
+    description: '关于本站可访问性的承诺与说明。',
   },
   {
-    title: 'Markdown page example',
+    title: 'Markdown 页面示例',
     url: '/markdown-page',
-    description: 'A demonstration of Markdown content rendering with accessible formatting and typography.',
+    description: '展示 Markdown 内容在本站的排版与呈现效果。',
   },
   {
-    title: 'MDX page example',
+    title: 'MDX 页面示例',
     url: '/mdx-page',
-    description: 'An example of MDX content combining Markdown with interactive React components.',
+    description: '展示 MDX 内容（Markdown + 组件）在本站的呈现效果。',
   },
   {
-    title: 'Thank you',
+    title: '提交成功',
     url: '/thank-you',
-    description: 'Confirmation page for successful form submissions and user interactions.',
+    description: '表单提交成功后的确认页面。',
   },
 ]
 ---
 
 <DefaultLayout
-  title="Sitemap"
-  description="Complete site map showing all pages, portfolio projects, and sections available on our accessible website."
+  title="站点地图"
+  description="完整站点地图：汇总主要页面、案例列表与站点结构入口。"
 >
   <PageHeader
-    title="Sitemap"
-    subtitle="A comprehensive overview of all pages and content available on our website, organized for easy navigation."
+    title="站点地图"
+    subtitle="将本站的主要页面与内容入口集中展示，便于快速导航与查找。"
     bgType="gradient"
   />
 
@@ -77,7 +76,7 @@ const staticPages = [
     <div class="container space-y-12">
       <!-- Main Pages Section -->
       <div>
-        <Heading level="h2" class="mb-6">Main pages</Heading>
+        <Heading level="h2" class="mb-6">主要页面</Heading>
         <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {
             staticPages.map((page) => (
@@ -87,7 +86,7 @@ const staticPages = [
                 </Heading>
                 <p class="mb-3">{page.description}</p>
                 <p class="text-xs">
-                  URL:{' '}
+                  URL：{' '}
                   <code class="rounded bg-neutral-100 px-1 py-0.5 text-xs text-neutral-500 dark:bg-neutral-800 dark:text-neutral-500">
                     {page.url}
                   </code>
@@ -100,57 +99,32 @@ const staticPages = [
 
       <!-- Portfolio Projects Section -->
       <div>
-        <Heading level="h2">Portfolio projects</Heading>
+        <Heading level="h2">案例列表</Heading>
         <p class="mb-6">
-          Explore our collection of {projects.length} accessibility-focused projects showcasing inclusive design and development
-          practices.
+          案例列表采用动态加载，请访问 <a href="/portfolio" class="text-primary hover:underline">/portfolio</a> 查看所有案例。
         </p>
-        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {
-            projects.map((project) => (
-              <article>
-                <Heading level="h3" size="h6" class="mb-3">
-                  <a href={`/portfolio/${project.id}`}>{project.data.title}</a>
-                </Heading>
-                <p class="mb-3">{project.data.description}</p>
-                <div class="text-xs">
-                  <p class="mb-1">
-                    By: <span class="font-medium">{project.data.author}</span>
-                  </p>
-                  <p>
-                    URL:{' '}
-                    <code class="rounded bg-neutral-100 px-1 py-0.5 text-xs text-neutral-500 dark:bg-neutral-800 dark:text-neutral-500">
-                      /portfolio/{project.id}
-                    </code>
-                  </p>
-                </div>
-              </article>
-            ))
-          }
-        </div>
       </div>
 
       <!-- Blog Section -->
       <div>
-        <Heading level="h2" class="mb-6">Blog</Heading>
+        <Heading level="h2" class="mb-6">资讯中心</Heading>
         <article>
           <Heading level="h3" size="h6" class="mb-3">
-            <a href="/blog"> Blog posts </a>
+            <a href="/blog"> 资讯列表 </a>
           </Heading>
           <p>
-            Discover articles about web accessibility, development best practices, and inclusive design. Our blog
-            features dynamic content with pagination for easy browsing.
+            浏览新闻动态、技术文章与最佳实践，支持分页浏览，便于持续阅读与检索。
           </p>
           <div class="text-xs">
-            <p>Features: Dynamic content from JSONPlaceholder API</p>
+            <p>说明：此页面示例包含分页与文章详情路由</p>
             <p>
-              Base URL: <code
+              列表入口： <code
                 class="rounded bg-neutral-100 px-1 py-0.5 text-xs text-neutral-500 dark:bg-neutral-800 dark:text-neutral-500"
                 >/blog</code
               >
             </p>
             <p>
-              Individual posts: <code
+              文章详情： <code
                 class="rounded bg-neutral-100 px-1 py-0.5 text-xs text-neutral-500 dark:bg-neutral-800 dark:text-neutral-500"
                 >/blog/[post-title]</code
               >
@@ -162,18 +136,16 @@ const staticPages = [
       <!-- Technical Information -->
       <Notification type="info" variant="accent">
         <div class="space-content">
-          <Heading level="h2" size="h6" class="mb-4">Technical sitemap information</Heading>
+          <Heading level="h2" size="h6" class="mb-4">站点地图技术说明</Heading>
           <ul>
             <li>
-              <span class="font-bold">XML Sitemap:</span> An automated XML sitemap is generated at
-              <code>/sitemap.xml</code>
-              for search engine optimization.
+              <span class="font-bold">XML 站点地图：</span> 系统会自动生成 <code>/sitemap.xml</code>，用于搜索引擎收录与 SEO。
             </li>
             <li>
-              <strong>Generated by:</strong> @astrojs/sitemap integration configured in astro.config.mjs
+              <strong>生成方式：</strong> 由 `@astrojs/sitemap` 集成生成（配置于 `astro.config.mjs`）
             </li>
             <li>
-              <strong>Last updated:</strong> Automatically updated on each build
+              <strong>更新时间：</strong> 每次构建时自动更新
             </li>
           </ul>
         </div>

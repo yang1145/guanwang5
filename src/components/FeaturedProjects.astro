@@ -1,17 +1,11 @@
 ---
-import { Card, Heading, Link } from 'accessible-astro-components'
+import { Heading, Link } from 'accessible-astro-components'
 import { Icon } from 'astro-icon/components'
-import { getCollection } from 'astro:content'
-
-// Import images directly for optimization
-import projectImage1 from '@assets/images/projects/project-image-1.png'
-import projectImage2 from '@assets/images/projects/project-image-2.png'
-import projectImage3 from '@assets/images/projects/project-image-3.png'
 
 /**
  * FeaturedProjects Component
  *
- * @description A component that displays featured projects from Astro Content Collections
+ * @description A component that displays featured projects from the API (Client-side rendered)
  */
 interface Props {
   /**
@@ -25,47 +19,116 @@ interface Props {
   limit?: number
   /**
    * The title for the section
-   * @default "Featured projects"
+   * @default "精选案例"
    */
   title?: string
 }
 
-const { class: className, limit = 3, title = 'Featured projects' } = Astro.props
-
-// Get projects from content collection
-const projects = await getCollection('projects')
-const projectImages = [projectImage1, projectImage2, projectImage3]
-
-// Limit projects and add featured images
-const featuredProjects = projects.slice(0, limit).map((project, index) => ({
-  ...project,
-  featuredImage: projectImages[index % projectImages.length],
-}))
+const { class: className, limit = 3, title = '精选案例' } = Astro.props
 ---
 
-<section class:list={[className, 'my-64']}>
+<section class:list={[className, 'my-64']} id="featured-projects">
   <div class="container">
     <Heading level="h2" class="mb-6">{title}</Heading>
-    <div class="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3">
-      {
-        featuredProjects.map((project) => (
-          <Card
-            imageComponent={project.featuredImage}
-            url={'/portfolio/' + project.id}
-            headingLevel="h2"
-            title={project.data.title}
-            footer={'Author: ' + project.data.author}
-          >
-            {project.data.description}
-          </Card>
-        ))
-      }
+    
+    <!-- 加载状态 -->
+    <div id="projects-loading" class="text-center py-12">
+      <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+      <p class="mt-2">加载中...</p>
     </div>
-    <div class="mt-12">
-      <Link href="/portfolio/" isButton animateOnHover animationType="nudge">
-        View all projects
-        <Icon aria-hidden="true" name="lucide:arrow-right" size="1.5rem" />
-      </Link>
+
+    <!-- 内容区域 -->
+    <div id="projects-content" class="hidden">
+      <div id="projects-grid" class="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3"></div>
+      <div class="mt-12">
+        <Link href="/portfolio/" isButton animateOnHover animationType="nudge">
+          查看全部案例
+          <Icon aria-hidden="true" name="lucide:arrow-right" size="1.5rem" />
+        </Link>
+      </div>
     </div>
   </div>
 </section>
+
+<script define:vars={{ limit }}>
+  import { getProducts } from '@utils/clientApi'
+
+  const projectsLoading = document.getElementById('projects-loading')
+  const projectsContent = document.getElementById('projects-content')
+  const projectsGrid = document.getElementById('projects-grid')
+
+  const projectImages = [
+    '/projects/project-image-1.png',
+    '/projects/project-image-2.png',
+    '/projects/project-image-3.png',
+  ]
+
+  function slugify(text: string): string {
+    return text
+      .toLowerCase()
+      .replace(/[^\w\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .trim()
+  }
+
+  async function loadFeaturedProjects() {
+    try {
+      const response = await getProducts()
+      const projects = response.data.slice(0, limit)
+
+      const html = projects.map((project, index) => {
+        const imageUrl = project.image_url || projectImages[index % projectImages.length]
+        const detailUrl = `/portfolio/${slugify(project.id + '-' + project.name)}`
+
+        return `
+          <article class="card h-full flex flex-col border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+            <a href="${detailUrl}" class="block">
+              <img src="${imageUrl}" alt="" class="w-full h-48 object-cover" loading="lazy" />
+            </a>
+            <div class="p-6 flex-1 flex flex-col">
+              <h3 class="text-xl font-bold mb-2">
+                <a href="${detailUrl}" class="hover:text-primary">${project.name}</a>
+              </h3>
+              <p class="text-gray-600 mb-4 flex-1">${project.description}</p>
+              <p class="text-sm text-gray-500">分类：${project.category}</p>
+            </div>
+          </article>
+        `
+      }).join('')
+
+      if (projectsGrid) {
+        projectsGrid.innerHTML = html
+      }
+
+      if (projectsLoading) projectsLoading.classList.add('hidden')
+      if (projectsContent) projectsContent.classList.remove('hidden')
+    } catch (error) {
+      console.error('Failed to load featured projects:', error)
+      if (projectsLoading) projectsLoading.innerHTML = '<p class="text-red-600">加载失败</p>'
+    }
+  }
+
+  loadFeaturedProjects()
+</script>
+
+<style>
+  .card {
+    background-color: var(--background-color);
+    border-color: var(--border-color-subtle);
+  }
+
+  .card:hover {
+    border-color: var(--primary-color);
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .animate-spin {
+    animation: spin 1s linear infinite;
+  }
+</style>

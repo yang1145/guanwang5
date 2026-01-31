@@ -6,7 +6,7 @@ import themeConfig from '@theme-config'
 /**
  * Logo Component
  *
- * @description Logo description
+ * @description Logo component with dynamic site name from API
  */
 interface Props {
   /**
@@ -32,5 +32,31 @@ const { loading = 'eager' }: Props = Astro.props
       />
     )
   }
-  <span class="text-sm font-bold sm:text-lg">{themeConfig.name}</span>
+  <span id="site-name" class="text-sm font-bold sm:text-lg">{themeConfig.name}</span>
 </Link>
+
+<script>
+  import { getSiteConfig } from '@utils/clientApi'
+
+  async function loadSiteName() {
+    try {
+      const response = await getSiteConfig()
+      const config = response.data
+
+      // 更新网站名称
+      const siteNameEl = document.getElementById('site-name')
+      if (siteNameEl && config.company_name) {
+        siteNameEl.textContent = config.company_name
+      }
+    } catch (error) {
+      console.error('Failed to load site name:', error)
+      // 失败时使用默认值
+    }
+  }
+
+  // 页面加载完成后获取配置
+  loadSiteName()
+  
+  // 监听页面切换事件（Astro transitions）
+  document.addEventListener('astro:page-load', loadSiteName)
+</script>

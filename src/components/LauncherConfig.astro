@@ -1,10 +1,7 @@
 ---
 import { Launcher, LauncherList, LauncherItem, LauncherGroup } from 'accessible-astro-launcher'
 import { Icon } from 'astro-icon/components'
-import { getCollection } from 'astro:content'
-import { BLOG_API_URL } from 'astro:env/server'
 import themeConfig from '@theme-config'
-import { slugify } from '@utils/slugify'
 
 /**
  * Launcher preferences for accessibility and theme.
@@ -12,15 +9,15 @@ import { slugify } from '@utils/slugify'
  */
 const launcherPreferenceItems = [
   {
-    label: 'Dark mode',
+    label: '深色模式',
     onAction: 'toggle-dark-mode',
   },
   {
-    label: 'High contrast',
+    label: '高对比度',
     onAction: 'toggle-high-contrast',
   },
   {
-    label: 'Reduced motion',
+    label: '减少动效',
     onAction: 'toggle-reduced-motion',
   },
 ]
@@ -32,58 +29,18 @@ const launcherPreferenceItems = [
 const maxLauncherBlogPosts = 30
 
 /**
- * Truncate blog post title to the first four words.
- * Used for generating short labels/URLs for launcher items.
- *
- * @param {string} title
- * @returns {string}
- */
-const truncateBlogTitle = (title: string): string => {
-  return title.split(' ').slice(0, 4).join(' ')
-}
-
-/**
- * Blog items for the launcher, fetched from `BLOG_API_URL`.
- * Shows up to `maxLauncherBlogPosts` items.
+ * Blog items for the launcher - 客户端渲染，初始为空
  *
  * @type {Array<{ label: string, href: string }>}
  */
-const launcherBlogItems = await (async () => {
-  if (!BLOG_API_URL) return []
-
-  try {
-    const response = await fetch(BLOG_API_URL)
-    if (!response.ok) {
-      console.warn(`Failed to fetch blog posts: ${response.status} ${response.statusText}`)
-      return []
-    }
-
-    const data = (await response.json()) as Array<{ title: string }>
-
-    return data.slice(0, maxLauncherBlogPosts).map((post) => {
-      const truncatedTitle = truncateBlogTitle(post.title)
-      const shortUrl = slugify(truncatedTitle)
-
-      return {
-        label: truncatedTitle,
-        href: `/blog/${shortUrl}`,
-      }
-    })
-  } catch {
-    return []
-  }
-})()
+const launcherBlogItems: Array<{ label: string; href: string }> = []
 
 /**
- * Project items for the launcher, sourced from the 'projects' collection.
+ * Project items for the launcher - 客户端渲染，初始为空
  *
  * @type {Array<{ label: string, href: string, keywords: Array<string> }>}
  */
-const launcherProjectItems = (await getCollection('projects')).map((project) => ({
-  label: project.data.title,
-  href: `/portfolio/${project.id}`,
-  keywords: [project.data.author, ...project.data.tags],
-}))
+const launcherProjectItems: Array<{ label: string; href: string; keywords: Array<string> }> = []
 
 /**
  * Navigation items for the launcher, built from `themeConfig.navigation.items`.
@@ -129,44 +86,40 @@ const launcherSocialItems = (themeConfig.socials ?? []).map((item) => ({
   external: item.external ?? false,
 }))
 
-const launcherAccessibleAstroProjects = [
+const launcherResources = [
   {
-    label: 'Accessible Astro Starter',
-    href: 'https://github.com/incluud/accessible-astro-starter',
+    label: 'Astro 官方网站',
+    href: 'https://astro.build/',
   },
   {
-    label: 'Accessible Astro Dashboard',
-    href: 'https://github.com/incluud/accessible-astro-dashboard',
+    label: 'WCAG 无障碍标准',
+    href: 'https://www.w3.org/WAI/standards-guidelines/wcag/',
   },
   {
-    label: 'Accessible Astro Components',
-    href: 'https://github.com/incluud/accessible-astro-components',
+    label: 'ARIA 创作实践指南（APG）',
+    href: 'https://www.w3.org/WAI/ARIA/apg/',
   },
   {
-    label: 'Accessible Astro Docs',
-    href: 'https://github.com/incluud/accessible-astro-docs',
+    label: 'WebAIM 对比度检测',
+    href: 'https://webaim.org/resources/contrastchecker/',
   },
   {
-    label: 'Accessible Astro Launcher',
-    href: 'https://github.com/incluud/accessible-astro-launcher',
-  },
-  {
-    label: 'Color Contrast Checker',
-    href: 'https://github.com/incluud/color-contrast-checker',
+    label: '无障碍测试工具：axe DevTools',
+    href: 'https://www.deque.com/axe/devtools/',
   },
 ]
 ---
 
 <Launcher id="site-launcher">
   <LauncherList>
-    <LauncherGroup label="Preferences">
+    <LauncherGroup label="偏好设置">
       {
         launcherPreferenceItems.map((item) => (
           <LauncherItem type="action" label={item.label} onAction={item.onAction} />
         ))
       }
     </LauncherGroup>
-    <LauncherGroup label="Navigate to">
+    <LauncherGroup label="页面导航">
       {
         launcherNavigationItems.map((item) => (
           <LauncherItem
@@ -180,7 +133,7 @@ const launcherAccessibleAstroProjects = [
     </LauncherGroup>
     {
       launcherBlogItems.length > 0 && (
-        <LauncherGroup label="Blog posts">
+        <LauncherGroup label="资讯文章">
           {launcherBlogItems.map((item) => (
             <LauncherItem type="navigation" label={item.label} href={item.href}>
               <Icon slot="icon" aria-hidden="true" name="lucide:scroll-text" size="16" />
@@ -191,7 +144,7 @@ const launcherAccessibleAstroProjects = [
     }
     {
       launcherProjectItems.length > 0 && (
-        <LauncherGroup label="Projects">
+        <LauncherGroup label="案例">
           {launcherProjectItems.map((item) => (
             <LauncherItem type="navigation" label={item.label} href={item.href} keywords={item.keywords}>
               <Icon slot="icon" aria-hidden="true" name="lucide:bookmark" size="16" />
@@ -201,9 +154,9 @@ const launcherAccessibleAstroProjects = [
       )
     }
     {
-      launcherAccessibleAstroProjects.length > 0 && (
-        <LauncherGroup label="Accessible Astro Projects">
-          {launcherAccessibleAstroProjects.map((item) => (
+      launcherResources.length > 0 && (
+        <LauncherGroup label="资源中心">
+          {launcherResources.map((item) => (
             <LauncherItem type="navigation" label={item.label} href={item.href}>
               <Icon slot="icon" aria-hidden="true" name="lucide:external-link" size="16" />
             </LauncherItem>
@@ -213,7 +166,7 @@ const launcherAccessibleAstroProjects = [
     }
     {
       launcherSocialItems.length > 0 && (
-        <LauncherGroup label="Socials">
+        <LauncherGroup label="社交与联系">
           {launcherSocialItems.map((item) => (
             <LauncherItem
               type="navigation"

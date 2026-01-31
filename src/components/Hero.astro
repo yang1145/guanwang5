@@ -6,7 +6,7 @@ import { Image } from 'astro:assets'
 /**
  * Hero Component
  *
- * @description A component that displays a hero section with a title, description, and image
+ * @description A component that displays a hero section with dynamic title and description from API
  */
 interface Props {
   /**
@@ -22,29 +22,32 @@ const { src = '/astronaut-hero-img.webp' }: Props = Astro.props
   <div class="container">
     <div class="grid grid-cols-1 items-center gap-24 lg:grid-cols-2">
       <div class="flex flex-col items-center gap-8 md:items-start">
-        <h1 class="text-center text-6xl md:text-left lg:text-8xl">
-          <slot><span class="text-gradient">Accessible</span> Starter for Astro</slot>
+        <h1 id="hero-title" class="text-center text-6xl md:text-left lg:text-8xl">
+          <slot><span class="text-gradient">示例</span> 科技有限公司</slot>
         </h1>
+        <p id="hero-description" class="text-center md:text-left text-xl text-gray-600 dark:text-gray-300 max-w-2xl">
+          专注企业数字化与高质量交付，助力品牌增长与业务转化
+        </p>
         <div class="flex flex-col gap-3 min-[500px]:flex-row">
           <Link
-            href="https://github.com/incluud/accessible-astro-starter"
+            href="/contact"
             isButton
             type="primary"
             animateOnHover
             animationType="boop"
           >
             <Icon aria-hidden="true" name="lucide:star" size="1.5rem" />
-            Star on GitHub
+            立即咨询
           </Link>
           <Link
-            href="https://accessible-astro.incluud.dev/"
+            href="/portfolio"
             isButton
             type="secondary"
             animateOnHover
             animationType="boop"
           >
             <Icon aria-hidden="true" name="lucide:bookmark" size="1.5rem" />
-            Read the docs
+            查看案例
           </Link>
         </div>
       </div>
@@ -53,9 +56,51 @@ const { src = '/astronaut-hero-img.webp' }: Props = Astro.props
   </div>
 </section>
 
+<script>
+  import { getSiteConfig } from '@utils/clientApi'
+
+  async function loadHeroContent() {
+    try {
+      const response = await getSiteConfig()
+      const config = response.data
+
+      // 更新 Hero 标题
+      const heroTitleEl = document.getElementById('hero-title')
+      if (heroTitleEl && config.company_name) {
+        // 提取第一个词作为渐变文字
+        const words = config.company_name.trim().split(/\s+/)
+        if (words.length > 1) {
+          heroTitleEl.innerHTML = `<span class="text-gradient">${words[0]}</span> ${words.slice(1).join(' ')}`
+        } else {
+          heroTitleEl.textContent = config.company_name
+        }
+      }
+
+      // 更新 Hero 描述
+      const heroDescEl = document.getElementById('hero-description')
+      if (heroDescEl && config.company_description) {
+        heroDescEl.textContent = config.company_description
+      }
+    } catch (error) {
+      console.error('Failed to load hero content:', error)
+      // 失败时使用默认值
+    }
+  }
+
+  // 页面加载完成后获取配置
+  loadHeroContent()
+  
+  // 监听页面切换事件（Astro transitions）
+  document.addEventListener('astro:page-load', loadHeroContent)
+</script>
+
 <style lang="scss">
   h1 {
     text-wrap: unset;
+  }
+
+  #hero-description {
+    min-height: 2rem; /* 防止内容闪烁 */
   }
 
   .text-gradient {

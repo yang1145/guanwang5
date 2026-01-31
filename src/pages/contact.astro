@@ -5,117 +5,119 @@ import { Form, Input, Button, Textarea, Checkbox, Fieldset, Heading, Link, Radio
 import { Icon } from 'astro-icon/components'
 ---
 
-<DefaultLayout title="Contact">
-  <PageHeader title="Contact" subtitle="Have a question? Get in touch with us!" bgType="gradient" />
+<DefaultLayout title="联系我们">
+  <PageHeader title="联系我们" subtitle="有需求或想了解更多？欢迎随时联系。" bgType="gradient" />
   <section class="my-16">
     <div class="container">
-      <Heading level="h2">Let's talk</Heading>
+      <Heading level="h2">一起聊聊</Heading>
     </div>
   </section>
   <section class="container">
     <div class="grid grid-cols-1 gap-32 md:grid-cols-2">
       <div class="space-content">
-        <Form name="contact" action="/thank-you" method="post">
-          <!-- Input field with custom validation message -->
+        <Form id="contact-form" name="contact">
           <Input
-            name="firstname"
-            label="First name"
+            name="name"
+            label="姓名"
             required
-            data-validation="We need your first name to address you correctly"
-            autocomplete="given-name"
+            data-validation="请填写您的姓名，便于我们称呼您"
+            autocomplete="name"
           />
 
-          <Input name="email" label="Email address" type="email" required autocomplete="email" />
+          <Input name="email" label="邮箱" type="email" required autocomplete="email" />
 
-          <!-- Custom validation with pattern -->
-          <Input name="phone" label="Phone number" type="tel" required data-validation-pattern="^[0-9]{10}$" />
+          <Input name="phone" label="电话" type="tel" autocomplete="tel" />
 
-          <Textarea name="message" label="Message" required />
+          <Textarea name="message" label="需求说明" required />
 
-          <!-- Checkbox group with validation -->
           <Fieldset
             name="interests"
-            legend="What are you interested in?"
+            legend="您希望我们协助的方向"
             required
-            data-validation="Please select at least one area of interest"
+            data-validation="请至少选择一个方向"
           >
-            <Checkbox name="accessibility" value="a11y" label="Accessibility and inclusive design" />
-            <Checkbox name="wcag-compliance" value="wcag" label="WCAG compliance and testing" />
-            <Checkbox name="screen-reader" value="sr" label="Screen reader optimization" />
-            <Checkbox name="keyboard-nav" value="keyboard" label="Keyboard navigation" />
+            <Checkbox name="interest-website" value="官网建设与品牌升级" label="官网建设与品牌升级" />
+            <Checkbox name="interest-system" value="系统/后台开发与集成" label="系统/后台开发与集成" />
+            <Checkbox name="interest-performance" value="性能优化与工程化改造" label="性能优化与工程化改造" />
+            <Checkbox name="interest-a11y" value="无障碍与可用性提升" label="无障碍与可用性提升" />
           </Fieldset>
 
-          <!-- Radio group (shared names) -->
-          <Fieldset name="experience" legend="Your experience level" required>
-            <Radio name="experience" value="beginner" label="Beginner" />
-            <Radio name="experience" value="intermediate" label="Intermediate" />
-            <Radio name="experience" value="advanced" label="Advanced" />
+          <Fieldset name="urgency" legend="项目紧急程度" required>
+            <Radio name="urgency" value="urgent" label="尽快启动" />
+            <Radio name="urgency" value="soon" label="1–2 个月内" />
+            <Radio name="urgency" value="planning" label="不着急，先规划" />
           </Fieldset>
 
-          <Button htmlType="submit" type="primary">Send Message</Button>
+          <div id="form-message" class="hidden"></div>
+
+          <Button htmlType="submit" type="primary">提交咨询</Button>
         </Form>
       </div>
       <div class="space-content">
-        <Heading level="h3">Contact us</Heading>
+        <Heading level="h3">联系方式</Heading>
         <p class="text-lg">
-          Experience the power of Accessible Astro Starter's Form components! This contact form showcases our
-          comprehensive form validation system with built-in accessibility features and WCAG 2.2 compliance.
+          欢迎通过电话或邮箱联系我们。通常我们会在 1 个工作日内回复，并安排进一步沟通与需求梳理。
         </p>
         <p>
-          Our Form component includes automatic validation, proper error handling, semantic HTML structure, and screen
-          reader support. Test out the various input types, validation patterns, and interactive elements to see how
-          accessibility and usability work together seamlessly.
+          为了更高效地了解你的目标，建议在留言中补充：行业、目标用户、参考网站/产品、预计上线时间与预算范围（可选）。
         </p>
 
         <div class="gap-2xs flex items-center">
           <Icon aria-hidden="true" name="lucide:phone" size={20} class="flex-shrink-0" />
           <p>
-            <span class="font-bold">Phone:</span>
-            <Link href="tel:+12345678900">+1 (234) 567-8900</Link>
+            <span class="font-bold">电话：</span>
+            <Link href="tel:+864000000000">400-000-0000</Link>
           </p>
         </div>
 
         <div class="gap-2xs flex items-center">
           <Icon aria-hidden="true" name="lucide:mail" size={20} class="flex-shrink-0" />
           <p>
-            <span class="font-bold">Email:</span>
-            <Link href="mailto:hello@accessibleastro.dev">hello@accessibleastro.dev</Link>
+            <span class="font-bold">邮箱：</span>
+            <Link href="mailto:contact@company.com">contact@company.com</Link>
           </p>
         </div>
 
         <div class="gap-2xs flex items-center">
           <Icon aria-hidden="true" name="lucide:map-pin" size={20} class="flex-shrink-0" />
           <p>
-            <span class="font-bold">Address:</span>
-            123 Accessibility Lane, Web Standards City
+            <span class="font-bold">地址：</span>
+            北京市朝阳区示例路 88 号
           </p>
         </div>
 
         <div class="gap-2xs flex items-center">
           <Icon aria-hidden="true" name="lucide:clock" size={20} class="flex-shrink-0" />
           <p>
-            <span class="font-bold">Business Hours:</span>
-            Monday - Friday, 9:00 AM - 5:00 PM EST
+            <span class="font-bold">工作时间：</span>
+            周一至周五 9:00–18:00
           </p>
         </div>
 
         <ul class="flex flex-wrap gap-2">
           <li>
-            <Link href="/" isButton isExternal hideIcon animateOnHover animationType="boop">
+            <Link href="https://www.facebook.com/" isButton isExternal hideIcon animateOnHover animationType="boop">
               <Icon aria-hidden="true" name="lucide:facebook" size={32} />
-              <span class="sr-only">Go to our Facebook page, opens in a new tab</span>
+              <span class="sr-only">打开我们的 Facebook 页面（新标签页）</span>
             </Link>
           </li>
           <li>
-            <Link href="/" isButton isExternal hideIcon animateOnHover animationType="boop">
+            <Link href="https://x.com/" isButton isExternal hideIcon animateOnHover animationType="boop">
               <Icon aria-hidden="true" name="lucide:twitter" size={32} />
-              <span class="sr-only">Go to our Twitter page, opens in a new tab</span>
+              <span class="sr-only">打开我们的 X（Twitter）页面（新标签页）</span>
             </Link>
           </li>
           <li>
-            <Link href="/" isButton isExternal hideIcon animateOnHover animationType="boop">
+            <Link
+              href="https://www.linkedin.com/company/example"
+              isButton
+              isExternal
+              hideIcon
+              animateOnHover
+              animationType="boop"
+            >
               <Icon aria-hidden="true" name="lucide:linkedin" size={32} />
-              <span class="sr-only">Go to our LinkedIn page, opens in a new tab</span>
+              <span class="sr-only">打开我们的领英页面（新标签页）</span>
             </Link>
           </li>
         </ul>
@@ -123,3 +125,86 @@ import { Icon } from 'astro-icon/components'
     </div>
   </section>
 </DefaultLayout>
+
+<script>
+  const API_BASE_URL = import.meta.env.PUBLIC_API_BASE_URL || 'http://localhost:3001/api'
+
+  const form = document.getElementById('contact-form') as HTMLFormElement
+  const messageDiv = document.getElementById('form-message') as HTMLDivElement
+
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault()
+
+      const formData = new FormData(form)
+      
+      // 获取所选的兴趣方向
+      const interests: string[] = []
+      const interestCheckboxes = form.querySelectorAll('input[name^="interest-"]:checked') as NodeListOf<HTMLInputElement>
+      interestCheckboxes.forEach(checkbox => {
+        if (checkbox.value) {
+          interests.push(checkbox.value)
+        }
+      })
+
+      // 获取紧急程度
+      const urgencyRadio = form.querySelector('input[name="urgency"]:checked') as HTMLInputElement
+      const urgency = urgencyRadio ? urgencyRadio.value : ''
+
+      // 构建提交数据
+      const data = {
+        name: formData.get('name') as string,
+        email: formData.get('email') as string,
+        phone: formData.get('phone') as string || undefined,
+        message: `${formData.get('message') as string}\n\n感兴趣的方向：${interests.join('、')}\n项目紧急程度：${urgency}`,
+      }
+
+      // 显示加载状态
+      const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement
+      const originalText = submitButton.textContent
+      submitButton.textContent = '提交中...'
+      submitButton.disabled = true
+
+      try {
+        const response = await fetch(`${API_BASE_URL}/contact`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        })
+
+        if (!response.ok) {
+          throw new Error('提交失败')
+        }
+
+        const result = await response.json()
+
+        // 显示成功消息
+        messageDiv.textContent = '提交成功！我们会尽快与您联系。'
+        messageDiv.className = 'mt-4 p-4 bg-green-100 text-green-800 rounded-lg'
+        form.reset()
+
+        // 3秒后跳转到感谢页面
+        setTimeout(() => {
+          window.location.href = '/thank-you'
+        }, 2000)
+      } catch (error) {
+        console.error('Form submission error:', error)
+        
+        // 显示错误消息
+        messageDiv.textContent = '提交失败，请稍后重试或直接联系我们。'
+        messageDiv.className = 'mt-4 p-4 bg-red-100 text-red-800 rounded-lg'
+      } finally {
+        submitButton.textContent = originalText
+        submitButton.disabled = false
+      }
+    })
+  }
+</script>
+
+<style>
+  .hidden {
+    display: none;
+  }
+</style>

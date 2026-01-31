@@ -68,10 +68,28 @@ const {
   joinLastBreadcrumb = false,
 } = Astro.props
 
+const defaultBreadcrumbLabels: Record<string, string> = {
+  blog: '资讯中心',
+  portfolio: '案例展示',
+  contact: '联系我们',
+  sitemap: '站点地图',
+  'thank-you': '提交成功',
+  tag: '标签',
+  'accessibility-statement': '无障碍声明',
+  'accessible-components': '组件展示',
+  'accessible-launcher': '快捷启动器',
+  'color-contrast-checker': '色彩对比度检测',
+  'markdown-page': 'Markdown 页面示例',
+  'mdx-page': 'MDX 页面示例',
+}
+
 // Helper function to format segment names
 const formatSegment = (segment: string): string => {
   if (customBreadcrumbLabels?.[segment]) {
     return customBreadcrumbLabels[segment]
+  }
+  if (defaultBreadcrumbLabels[segment]) {
+    return defaultBreadcrumbLabels[segment]
   }
   return segment
     .split('-')
@@ -105,7 +123,7 @@ const sanitizedSubtitle: string = subtitle
 
           return (
             <Breadcrumbs>
-              <BreadcrumbsItem href="/" label="Home" />
+              <BreadcrumbsItem href="/" label="首页" />
               {segments.map((segment, index) => {
                 if (joinLastBreadcrumb && index === segments.length - 1) {
                   return null
